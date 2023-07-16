@@ -1,0 +1,19 @@
+{
+  "name": "sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc lib/index.ts --outDir dist && node uploadToS3.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "naamukim",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.1415.0",
+    "dotenv": "^16.3.1",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
+  }
+}
