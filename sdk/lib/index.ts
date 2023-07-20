@@ -8,9 +8,9 @@ const customPopState = (e: PopStateEvent) => {
 
 const setPopStateEvent = () => {
   if (!window) {
-    throw new Error('window is not defined');
+    throw new Error("window is not defined");
   }
-  window.addEventListener('popstate', customPopState);
+  window.addEventListener("popstate", customPopState);
 };
 
 interface PageInfo {
@@ -28,8 +28,9 @@ const sendPageInfoToServer = ({
   };
 
   const xhr: XMLHttpRequest = new XMLHttpRequest();
-  xhr.open('POST', 'endpoint', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("POST", "http://localhost:8080/", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
 
   xhr.send(JSON.stringify(data));
 };
+setPopStateEvent();
