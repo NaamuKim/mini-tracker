@@ -8,6 +8,9 @@ export default function Home() {
       <Link href="/second">
         <h2>Go to second page</h2>
       </Link>
+      <Link href="/login">
+        <h2>Go to login page</h2>
+      </Link>
     </main>
   );
 }
