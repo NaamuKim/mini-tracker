@@ -1,5 +1,7 @@
 import express from "express";
 import mysql, { MysqlError } from "mysql";
+import cookieParser from "cookie-parser";
+import crypto from "crypto";
 import { mySqlConfig } from "./config/db";
 import cors from "cors";
 import { pipeMiddlewares } from "./module/fn";
@@ -9,8 +11,11 @@ const port = 8080;
 pipeMiddlewares(app, [
   express.json(),
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true,
   }),
+  cookieParser(),
+  express.urlencoded({ extended: true }),
 ]);
 
 const connection = mysql.createConnection(mySqlConfig);
@@ -42,6 +47,26 @@ app.post("/", ({ body }, res) => {
   }
 
   res.send("success");
+});
+
+app.post("/login", (req, res) => {
+  if (!req.body.userId || !req.body.password) {
+    res.send("userId and password are required");
+    return;
+  }
+  const userId = req.body.userId as string;
+  const password = req.body.password as string;
+
+  const hash = crypto.createHash("sha256");
+  hash.update(userId + password);
+  const hashedValue = hash.digest("hex");
+
+  res.cookie("mini-tracker-cookie", hashedValue, {
+    maxAge: 900000,
+    httpOnly: true,
+  });
+
+  res.json({ message: "Logged in and hash cookie set!" });
 });
 
 app.listen(port, () => {
