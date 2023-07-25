@@ -1,7 +1,7 @@
-import { Express, RequestHandler } from "express";
+import { Application, RequestHandler } from "express";
 
 export const pipeMiddlewares = (
-  app: Express,
+  app: Application,
   middlewares: RequestHandler[],
 ) => {
   middlewares.forEach((middleware) => {
