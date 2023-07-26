@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc lib/index.ts --outDir dist && node uploadToS3.js",
+    "build": "tsc --outDir dist && node uploadToS3.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
