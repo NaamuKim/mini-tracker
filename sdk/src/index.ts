@@ -1,8 +1,16 @@
 import { handlePageChange } from "@/handlers/pageChangeHandler";
+import { Storage } from "@/services/storage/Storage";
 
 (function () {
+  const storage: Storage | null = Storage.getAvailableStorage();
+
+  if (!storage) {
+    // TODO: 스토리지가 없을 경우 서버로 에러를 전송한다.
+    return;
+  }
+
   let previousPage: string =
-    localStorage.getItem("previousPage") || window.location.href;
+    storage.getItem("previousPage") || window.location.href;
 
   const originalPushState: typeof history.pushState =
     history.pushState.bind(history);
