@@ -1,12 +1,15 @@
 import { UserPostedInfo } from "@/models/userPostedInfo";
+import { fetcher } from "@/services/http/fetcher";
 
 export const sendPageInfoToServer = <T extends UserPostedInfo>({
   previousPage,
   currentPage,
+  scrollY,
+  scrollX,
 }: T) => {
-  const data = { previousPage, currentPage };
-  const xhr: XMLHttpRequest = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:8080/", true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(data));
+  const data = { previousPage, currentPage, scrollY, scrollX };
+  fetcher("http://localhost:8080/", {
+    method: "POST",
+    body: data,
+  });
 };

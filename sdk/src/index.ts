@@ -9,23 +9,20 @@ import { Storage } from "@/services/storage/Storage";
     return;
   }
 
-  let previousPage: string =
-    storage.getItem("previousPage") || window.location.href;
-
   const originalPushState: typeof history.pushState =
     history.pushState.bind(history);
   history.pushState = function () {
     originalPushState.apply(this, arguments as any);
-    handlePageChange(previousPage);
+    handlePageChange(storage);
   };
 
   const originalReplaceState: typeof history.replaceState =
     history.replaceState.bind(history);
   history.replaceState = function () {
     originalReplaceState.apply(this, arguments as any);
-    handlePageChange(previousPage);
+    handlePageChange(storage);
   };
 
-  window.onload = () => handlePageChange(previousPage);
-  window.onpopstate = () => handlePageChange(previousPage);
+  window.onload = () => handlePageChange(storage);
+  window.onpopstate = () => handlePageChange(storage);
 })();
