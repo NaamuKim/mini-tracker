@@ -1,11 +1,4 @@
-import mysql from "mysql";
+import mysql from "mysql2/promise";
 import { mySqlConfig } from "../env/env";
 
-export const connection = mysql.createConnection(mySqlConfig);
-
-connection.connect();
-
-connection.query("SELECT * from UserEvents", (error, rows, fields) => {
-  if (error) throw error;
-  console.log("Routings info is: ", rows);
-});
+export const connection = mysql.createPool(mySqlConfig);
