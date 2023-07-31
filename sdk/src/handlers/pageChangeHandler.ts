@@ -7,8 +7,8 @@ export const handlePageChange = (storage: IStorage) => {
   const currentPage = window.location.href;
   if (currentPage !== previousPage) {
     sendPageInfoToServer<UserPostedInfo>({
-      previousPage,
-      currentPage,
+      previous_page: previousPage,
+      current_page: currentPage,
       scrollY: window.scrollY,
       scrollX: window.scrollX,
     });

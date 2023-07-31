@@ -1,6 +1,6 @@
 export type UserPostedInfo = {
-  previousPage: string;
-  currentPage: string;
+  previous_page: string;
+  current_page: string;
   scrollY: number;
   scrollX: number;
 };
