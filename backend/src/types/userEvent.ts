@@ -1,3 +1,5 @@
+import { RowDataPacket } from "mysql2";
+
 type EventType = "page_transition" | "click" | "input" | "scroll" | "resize";
 
 export interface UserEvent {
@@ -8,9 +10,13 @@ export interface UserEvent {
   referrer_url: string;
 }
 
-export interface PageTransitionEvent extends UserEvent {
+export interface PageTransitionEvent extends RowDataPacket {
   scrollY: number;
   scrollX: number;
   previous_page: string;
   current_page: string;
+}
+
+export interface JoinedPageTransitionEvent extends PageTransitionEvent {
+  event_timestamp: string;
 }

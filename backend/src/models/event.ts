@@ -1,5 +1,8 @@
-import { connection } from "../config/db";
-import { PageTransitionEvent } from "../types/userEvent";
+import { pool } from "../config/db";
+import {
+  JoinedPageTransitionEvent,
+  PageTransitionEvent,
+} from "../types/userEvent";
 import { ResultSetHeader } from "mysql2";
 
 export const createUserEvent = async ({
@@ -13,6 +16,7 @@ export const createUserEvent = async ({
   scrollY,
   scrollX,
 }: PageTransitionEvent) => {
+  const connection = await pool.getConnection();
   try {
     await connection.beginTransaction();
 
@@ -39,8 +43,33 @@ export const createUserEvent = async ({
 
     await connection.commit();
   } catch (err) {
+    console.log(err);
     await connection.rollback();
-    console.error(err);
+    throw err;
+  }
+};
+
+export const getPageTransitionEvents = async () => {
+  const connection = await pool.getConnection();
+  try {
+    const [result] = await connection.query<JoinedPageTransitionEvent[]>(
+      `SELECT
+           PageTransitionEvents.user_event_id,
+           PageTransitionEvents.current_page,
+           PageTransitionEvents.previous_page,
+           PageTransitionEvents.scrollY,
+           PageTransitionEvents.scrollX,
+           userEvents.event_timestamp
+       FROM
+           PageTransitionEvents
+               INNER JOIN
+           userEvents
+           ON
+               PageTransitionEvents.user_event_id = userEvents.id;
+      `,
+    );
+    return result;
+  } catch (err) {
     throw err;
   }
 };

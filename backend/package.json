@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc --outDir dist",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q index.js\""
+    "dev": "concurrently \"npx tsc --outdir dist --watch\" \"nodemon -q dist/index.js\""
   },
   "module": "esm",
   "keywords": [],
