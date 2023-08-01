@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  compiler: {
-    emotion: true,
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

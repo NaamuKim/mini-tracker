@@ -1,0 +1,52 @@
+:root {
+    --background-color: #212529;
+    --upper-background-color: #2A2E32;
+    --text-color: #F5F5F5;
+    --text-secondary-color: #848588;
+    --link-color: #FC413B;
+    --link-hover-color: #FC413B;
+    --button-hover-color: #EB3E3B;
+}
+
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    background: var(--background-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+button {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Add other styles as needed */
