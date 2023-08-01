@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { fetcher } from "@/lib/module";
 import { useRouter } from "next/navigation";
+import { fetcher } from "@/app.module/fetcher";
 const LoginForm: NextPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");

@@ -2,10 +2,10 @@
 import React from "react";
 import { NextPage } from "next";
 import Link from "next/link";
-import { pages } from "@/lib/common/pages";
 import styles from "./pageNo.module.css";
 import { usePathname } from "next/navigation";
-const Page: NextPage = () => {
+import { getPages } from "@/app.module/pages";
+const ExamplePageNo: NextPage = () => {
   const pathname = usePathname();
 
   return (
@@ -13,7 +13,7 @@ const Page: NextPage = () => {
       <h2 className={styles.header}>
         here is page {pathname.split("/").pop()} <br />
       </h2>
-      {pages.map(({ href, pageNo }) => (
+      {getPages(10).map(({ href, pageNo }) => (
         <Link key={"page-link" + href} href={href} className={styles.pageLink}>
           <em>Go to page ${pageNo}</em>
         </Link>
@@ -22,4 +22,4 @@ const Page: NextPage = () => {
   );
 };
 
-export default Page;
+export default ExamplePageNo;

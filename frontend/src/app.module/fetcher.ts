@@ -1,4 +1,4 @@
-export const fetcher = ({
+export const fetcher = <T>({
   url,
   method,
   body,
@@ -6,7 +6,7 @@ export const fetcher = ({
   url: string;
   method: string;
   body?: any;
-}): Promise<any> => {
+}): Promise<T> => {
   try {
     return fetch(url, {
       method,
