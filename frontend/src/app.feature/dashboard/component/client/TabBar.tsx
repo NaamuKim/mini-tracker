@@ -3,13 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useSearchParams } from "next/navigation";
 
-type Tab = {
-  name: string;
-  href: string;
-  param: string;
-};
-
-const TabNames: ReadonlyArray<Tab> = [
+const TabNames = [
   {
     name: "Overview",
     href: "/dashboard?tab=overview",
@@ -25,19 +19,20 @@ const TabNames: ReadonlyArray<Tab> = [
     href: "/dashboard?tab=click",
     param: "click",
   },
-];
+] as const;
+
+type Tab = (typeof TabNames)[number];
+
 const isCurrentTab = ({
   tabParam,
   currentTab,
 }: {
-  tabParam: Pick<Tab, "param">;
-  currentTab: Pick<Tab, "param">;
+  tabParam: Tab["param"];
+  currentTab: string;
 }) => currentTab === tabParam;
 
 const TabBar = () => {
-  const currentTab =
-    (useSearchParams().get("tab") as unknown as Pick<Tab, "param">) ||
-    "overview";
+  const currentTab = useSearchParams().get("tab") || "overview";
 
   return (
     <StyledWrapper>
@@ -46,12 +41,9 @@ const TabBar = () => {
           key={tab.name}
           href={tab.href}
           className={
-            isCurrentTab({
-              tabParam: tab.param as unknown as Pick<Tab, "param">,
-              currentTab,
-            })
+            isCurrentTab({ tabParam: tab.param, currentTab })
               ? "active"
-              : ""
+              : undefined
           }
         >
           {tab.name}
@@ -68,13 +60,30 @@ const StyledWrapper = styled.nav`
   justify-content: space-between;
   width: 300px;
   > a {
+    height: 30px;
+    position: relative;
     text-decoration: none;
     color: var(--text-secondary-color);
-    &:hover {
-      color: var(--link-hover-color);
+
+    &:hover,
+    &:focus {
+      color: var(--text-color);
     }
+
     &.active {
-      color: var(--link-hover-color);
+      color: var(--text-color);
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 40%;
+        min-width: 20px;
+        height: 3px;
+        background-color: var(--link-hover-color);
+        border-radius: 10px;
+      }
     }
   }
 `;
