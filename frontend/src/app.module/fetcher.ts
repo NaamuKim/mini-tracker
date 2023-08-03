@@ -1,14 +1,16 @@
+export const BASE_URL = "http://localhost:8080";
+
 export const fetcher = <T>({
   url,
   method,
   body,
 }: {
   url: string;
-  method: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
   body?: any;
 }): Promise<T> => {
   try {
-    return fetch(url, {
+    return fetch(BASE_URL + url, {
       method,
       body: JSON.stringify(body),
       headers: {
