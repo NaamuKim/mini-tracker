@@ -18,8 +18,9 @@ router.post("/page-transition", async (req, res) => {
 
 router.get("/page-transitions", async (req, res) => {
   try {
-    const userEvents = await getPageTransitionEvents();
-    res.json(userEvents);
+    const pageTransitionEvents = await getPageTransitionEvents();
+
+    res.json(pageTransitionEvents);
   } catch (err) {
     console.error(err);
     res.status(500).send("DataBase Error");
