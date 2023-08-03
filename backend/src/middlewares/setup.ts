@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { pipeMiddlewares } from "../fns/pipeMiddlewares";
+import { connectionMiddleware } from "./database";
 
 export const setupMiddleware = (app: express.Application) => {
   pipeMiddlewares(app, [
@@ -12,5 +13,6 @@ export const setupMiddleware = (app: express.Application) => {
     }),
     cookieParser(),
     express.urlencoded({ extended: true }),
+    connectionMiddleware,
   ]);
 };

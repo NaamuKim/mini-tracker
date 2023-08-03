@@ -8,7 +8,7 @@ router.post("/page-transition", async (req, res) => {
   const userEvents: PageTransitionEvent = req.body;
 
   try {
-    await createUserEvent(userEvents);
+    await createUserEvent(req.dbConnection, userEvents);
     res.status(201).send("success");
   } catch (err) {
     console.error(err);
@@ -18,7 +18,9 @@ router.post("/page-transition", async (req, res) => {
 
 router.get("/page-transitions", async (req, res) => {
   try {
-    const pageTransitionEvents = await getPageTransitionEvents();
+    const pageTransitionEvents = await getPageTransitionEvents(
+      req.dbConnection,
+    );
 
     res.json(pageTransitionEvents);
   } catch (err) {

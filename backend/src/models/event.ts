@@ -1,22 +1,24 @@
-import { pool } from "../config/db";
 import {
   JoinedPageTransitionEvent,
   PageTransitionEvent,
 } from "../types/userEvent";
 import { ResultSetHeader } from "mysql2";
+import { PoolConnection } from "mysql2/promise";
 
-export const createUserEvent = async ({
-  previous_page,
-  current_page,
-  user_id,
-  session_id,
-  event_type,
-  url,
-  referrer_url,
-  scrollY,
-  scrollX,
-}: PageTransitionEvent) => {
-  const connection = await pool.getConnection();
+export const createUserEvent = async (
+  connection: PoolConnection,
+  {
+    previous_page,
+    current_page,
+    user_id,
+    session_id,
+    event_type,
+    url,
+    referrer_url,
+    scrollY,
+    scrollX,
+  }: PageTransitionEvent,
+) => {
   try {
     await connection.beginTransaction();
 
@@ -40,20 +42,15 @@ export const createUserEvent = async ({
         `;
     params = [user_event_id, current_page, previous_page, scrollY, scrollX];
     await connection.query(sql, params);
-
     await connection.commit();
-    pool.releaseConnection(connection);
   } catch (err) {
     console.log(err);
     await connection.rollback();
-    pool.releaseConnection(connection);
     throw err;
   }
 };
 
-export const getPageTransitionEvents = async () => {
-  const connection = await pool.getConnection();
-
+export const getPageTransitionEvents = async (connection: PoolConnection) => {
   const [result] = await connection.query<JoinedPageTransitionEvent[]>(
     `SELECT
       PageTransitionEvents.current_page,
@@ -73,6 +70,5 @@ export const getPageTransitionEvents = async () => {
       LIMIT 5;
     `,
   );
-  pool.releaseConnection(connection);
   return result;
 };
