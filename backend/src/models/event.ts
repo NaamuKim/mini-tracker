@@ -42,34 +42,37 @@ export const createUserEvent = async ({
     await connection.query(sql, params);
 
     await connection.commit();
+    pool.releaseConnection(connection);
   } catch (err) {
     console.log(err);
     await connection.rollback();
+    pool.releaseConnection(connection);
     throw err;
   }
 };
 
 export const getPageTransitionEvents = async () => {
   const connection = await pool.getConnection();
-  try {
-    const [result] = await connection.query<JoinedPageTransitionEvent[]>(
-      `SELECT
-           PageTransitionEvents.user_event_id,
-           PageTransitionEvents.current_page,
-           PageTransitionEvents.previous_page,
-           PageTransitionEvents.scrollY,
-           PageTransitionEvents.scrollX,
-           userEvents.event_timestamp
-       FROM
-           PageTransitionEvents
-               INNER JOIN
-           userEvents
-           ON
-               PageTransitionEvents.user_event_id = userEvents.id;
-      `,
-    );
-    return result;
-  } catch (err) {
-    throw err;
-  }
+
+  const [result] = await connection.query<JoinedPageTransitionEvent[]>(
+    `SELECT
+      PageTransitionEvents.current_page,
+        PageTransitionEvents.previous_page,
+      COUNT(*) as transition_count
+      FROM
+      PageTransitionEvents
+      INNER JOIN
+      userEvents
+      ON
+      PageTransitionEvents.user_event_id = userEvents.id
+      GROUP BY
+      PageTransitionEvents.current_page,
+        PageTransitionEvents.previous_page
+      ORDER BY
+      transition_count DESC
+      LIMIT 5;
+    `,
+  );
+  pool.releaseConnection(connection);
+  return result;
 };
