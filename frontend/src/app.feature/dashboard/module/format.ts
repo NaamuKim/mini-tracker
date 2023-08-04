@@ -1,11 +1,4 @@
-export interface PageTransition {
-  user_event_id: number;
-  current_page: string | null;
-  previous_page: string | null;
-  scrollY: number;
-  scrollX: number;
-  event_timestamp: string;
-}
+import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
 
 interface SankeyLink {
   source: number;

@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import SankeyPageTransition from "@/app.feature/dashboard/component/client/SankeyPageTransition";
+import BarPageTransition from "@/app.feature/dashboard/component/client/chart/BarPageTransition";
+import SankeyPageTransition from "@/app.feature/dashboard/component/client/chart/SankeyPageTransition";
 
 const Dashboards = () => {
   return (
     <StyledWrapper>
+      <>
+        <BarPageTransition />
+      </>
       <SankeyPageTransition />
     </StyledWrapper>
   );

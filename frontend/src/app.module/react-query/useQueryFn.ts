@@ -3,7 +3,7 @@ import { fetcher } from "@/app.module/fetcher";
 
 export const useQueryFn = <T>(
   queryKeys: [string, ...object[]],
-  options: UseQueryOptions<T> & { customQueryKeys?: any } = {},
+  options: UseQueryOptions<T & any> & { customQueryKeys?: any } = {},
 ) =>
   useQuery<T>(queryKeys, () => fetcher({ url: queryKeys[0], method: "GET" }), {
     ...options,

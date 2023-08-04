@@ -11,9 +11,9 @@ import {
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import {
   formatDataForSankeyChart,
-  PageTransition,
   SankeyData,
 } from "@/app.feature/dashboard/module/format";
+import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
 
 const SankeyPageTransition = () => {
   const { data } = useQueryFn(["/event/page-transitions"], {
