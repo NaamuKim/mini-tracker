@@ -20,3 +20,9 @@ export interface PageTransitionEvent extends RowDataPacket {
 export interface JoinedPageTransitionEvent extends PageTransitionEvent {
   event_timestamp: string;
 }
+
+export interface BestPageTransitionEvent extends RowDataPacket {
+  current_page: string;
+  previous_page: string;
+  transition_count: number;
+}

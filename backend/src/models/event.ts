@@ -1,4 +1,5 @@
 import {
+  BestPageTransitionEvent,
   JoinedPageTransitionEvent,
   PageTransitionEvent,
 } from "../types/userEvent";
@@ -70,5 +71,17 @@ export const getPageTransitionEvents = async (connection: PoolConnection) => {
       LIMIT 5;
     `,
   );
+  return result;
+};
+
+export const getPageTransitionBest5 = async (connection: PoolConnection) => {
+  const [result] = await connection.query<BestPageTransitionEvent[]>(`
+    SELECT previous_page, current_page, COUNT(*) as transition_count
+    FROM PageTransitionEvents
+    GROUP BY previous_page, current_page
+    ORDER BY transition_count DESC
+    LIMIT 5;
+  `);
+
   return result;
 };

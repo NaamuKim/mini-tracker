@@ -1,6 +1,10 @@
 import express from "express";
 import { PageTransitionEvent } from "../types/userEvent";
-import { createUserEvent, getPageTransitionEvents } from "../models/event";
+import {
+  createUserEvent,
+  getPageTransitionBest5,
+  getPageTransitionEvents,
+} from "../models/event";
 
 const router = express.Router();
 
@@ -23,6 +27,16 @@ router.get("/page-transitions", async (req, res) => {
     );
 
     res.json(pageTransitionEvents);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("DataBase Error");
+  }
+});
+
+router.get("/page-transition-best", async (req, res) => {
+  try {
+    const pageTransitionBest5 = await getPageTransitionBest5(req.dbConnection);
+    res.json(pageTransitionBest5);
   } catch (err) {
     console.error(err);
     res.status(500).send("DataBase Error");
