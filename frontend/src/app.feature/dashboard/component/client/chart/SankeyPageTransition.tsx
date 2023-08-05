@@ -14,18 +14,23 @@ import {
   SankeyData,
 } from "@/app.feature/dashboard/module/format";
 import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
+import { API_SANKEY_TRANSITION } from "@/app.module/constant/api";
 
 const SankeyPageTransition = () => {
-  const { data } = useQueryFn(["/event/page-transitions"], {
-    select: (data) => formatDataForSankeyChart(data as PageTransition[]),
-  });
+  const { data } = useQueryFn<PageTransition[], SankeyData>(
+    [API_SANKEY_TRANSITION],
+    {
+      select: (data) => formatDataForSankeyChart(data),
+    },
+  );
+
   if (!data) return null;
 
   return (
     <DashboardBackground title="Page Transitions">
       <ResponsiveContainer aspect={2 / 1}>
         <Sankey
-          data={data as SankeyData}
+          data={data}
           node={({ x, y, height, index, payload, containerWidth }) => {
             const width = 20;
             const isOut = x + width + 6 > containerWidth;

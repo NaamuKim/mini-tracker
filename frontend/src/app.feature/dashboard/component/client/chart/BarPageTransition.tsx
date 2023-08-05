@@ -11,22 +11,23 @@ import {
 } from "recharts";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { BestPageTransition } from "@/app.feature/dashboard/types/pageTransition";
+import { API_BEST_BARS_TRANSITION } from "@/app.module/constant/api";
 
 const BarPageTransition = () => {
-  const { data } = useQueryFn<BestPageTransition[]>(
-    ["/event/page-transition-best"],
-    {
-      select: (data) => {
-        return data.map((item: BestPageTransition) => ({
-          name:
-            item.previous_page.split("/").pop() +
-            " -> " +
-            item.current_page.split("/").pop(),
-          value: item.transition_count,
-        }));
-      },
+  const { data } = useQueryFn<
+    BestPageTransition[],
+    { name: string; value: number }[]
+  >([API_BEST_BARS_TRANSITION], {
+    select: (data) => {
+      return data.map((item: BestPageTransition) => ({
+        name:
+          item.previous_page.split("/").pop() +
+          " -> " +
+          item.current_page.split("/").pop(),
+        value: item.transition_count,
+      }));
     },
-  );
+  });
 
   if (!data) return null;
 
