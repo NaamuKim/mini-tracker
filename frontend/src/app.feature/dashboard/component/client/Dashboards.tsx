@@ -6,9 +6,7 @@ import SankeyPageTransition from "@/app.feature/dashboard/component/client/chart
 const Dashboards = () => {
   return (
     <StyledWrapper>
-      <>
-        <BarPageTransition />
-      </>
+      <BarPageTransition />
       <SankeyPageTransition />
     </StyledWrapper>
   );
@@ -17,5 +15,7 @@ const Dashboards = () => {
 export default Dashboards;
 
 const StyledWrapper = styled.div`
+  display: flex;
+  gap: 30px;
   margin-top: 30px;
 `;

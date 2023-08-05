@@ -27,12 +27,12 @@ const SankeyPageTransition = () => {
   if (!data) return null;
 
   return (
-    <DashboardBackground title="Page Transitions">
-      <ResponsiveContainer aspect={2 / 1}>
+    <DashboardBackground title="Page Transitions" hasAnimation>
+      <ResponsiveContainer aspect={5 / 2} width={600}>
         <Sankey
           data={data}
           node={({ x, y, height, index, payload, containerWidth }) => {
-            const width = 20;
+            const width = 15;
             const isOut = x + width + 6 > containerWidth;
             return (
               <Layer key={`CustomNode${index}`}>
@@ -67,7 +67,7 @@ const SankeyPageTransition = () => {
               </Layer>
             );
           }}
-          margin={{ top: 0, right: 120, bottom: 80, left: 80 }}
+          margin={{ top: 0, right: 100, bottom: 80, left: 0 }}
           link={{
             stroke: "var(--sub-color)",
             strokeWidth: 40,

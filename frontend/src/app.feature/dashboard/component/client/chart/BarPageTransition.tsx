@@ -1,17 +1,9 @@
 import React from "react";
-import DashboardBackground from "@/app.feature/dashboard/component/client/DashboardBackground";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { BestPageTransition } from "@/app.feature/dashboard/types/pageTransition";
 import { API_BEST_BARS_TRANSITION } from "@/app.module/constant/api";
+import DashboardBackground from "@/app.feature/dashboard/component/client/DashboardBackground";
 
 const BarPageTransition = () => {
   const { data } = useQueryFn<
@@ -32,14 +24,21 @@ const BarPageTransition = () => {
   if (!data) return null;
 
   return (
-    <DashboardBackground title="Page Transition Bar">
-      <BarChart width={500} height={300} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
+    <DashboardBackground title="Best Page Transition">
+      <BarChart
+        width={300}
+        height={300}
+        data={data}
+        margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+      >
         <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="value" fill="var(--link-color)" />
+        <YAxis width={20} />
+        <Tooltip
+          labelStyle={{
+            color: "var(--text-secondary-color)",
+          }}
+        />
+        <Bar dataKey="value" fill="var(--link-color)" barSize={30} />
       </BarChart>
     </DashboardBackground>
   );
