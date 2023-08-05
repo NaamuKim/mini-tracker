@@ -14,7 +14,7 @@ import {
   SankeyData,
 } from "@/app.feature/dashboard/module/format";
 import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
-import { API_SANKEY_TRANSITION } from "@/app.module/constant/api";
+import { API_SANKEY_TRANSITION } from "@/app.module/constant/api/app.dashboard";
 
 const SankeyPageTransition = () => {
   const { data } = useQueryFn<PageTransition[], SankeyData>(
