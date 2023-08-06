@@ -85,3 +85,22 @@ export const getPageTransitionBest5 = async (connection: PoolConnection) => {
 
   return result;
 };
+
+export const createUserPageViewEvent = async (
+  connection: PoolConnection,
+  {
+    user_id,
+    session_id,
+    url,
+    referrer_url,
+  }: { user_id: string; session_id: string; url: string; referrer_url: string },
+) => {
+  const [result] = await connection.query<ResultSetHeader>(
+    `INSERT INTO 
+        UserEvents(user_id, session_id, event_type, url, referrer_url) 
+        VALUES (?, ?, ?, ?, ?)
+    `,
+    [user_id, session_id, "page-view", url, referrer_url],
+  );
+  return result;
+};

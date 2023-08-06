@@ -43,4 +43,16 @@ router.get("/page-transition-best", async (req, res) => {
   }
 });
 
+router.post("/page-view", async (req, res) => {
+  const userEvents: PageTransitionEvent = req.body;
+
+  try {
+    await createUserEvent(req.dbConnection, userEvents);
+    res.status(201).send("success");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("DataBase Error");
+  }
+});
+
 export default router;

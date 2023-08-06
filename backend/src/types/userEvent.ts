@@ -1,6 +1,6 @@
 import { RowDataPacket } from "mysql2";
 
-type EventType = "page_transition" | "click" | "input" | "scroll" | "resize";
+type EventType = "page-transition" | "click" | "input" | "scroll" | "page-view";
 
 export interface UserEvent {
   user_id?: string;
