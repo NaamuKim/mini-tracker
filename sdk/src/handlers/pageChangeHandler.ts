@@ -1,12 +1,12 @@
 import { UserPostedInfo } from "@/models/userPostedInfo";
-import { sendPageInfoToServer } from "@/services/collector";
+import { sendPageTransitionInfoToServer } from "@/services/collector";
 import { IStorage } from "@/services/storage/IStorage";
 
 export const handlePageChange = (storage: IStorage) => {
   const previousPage = storage.getItem("previousPage") || window.location.href;
   const currentPage = window.location.href;
   if (currentPage !== previousPage) {
-    sendPageInfoToServer<UserPostedInfo>({
+    sendPageTransitionInfoToServer<UserPostedInfo>({
       previous_page: previousPage,
       current_page: currentPage,
       scrollY: window.scrollY,

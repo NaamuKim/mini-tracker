@@ -1,15 +1,17 @@
+import { BASE_URL } from "@/constants/api";
+
 type Method = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
 
 type FetcherOptions = {
   method: Method;
-  body?: any;
+  body?: unknown;
   headers?: Record<string, string>;
 };
 
 export const fetcher = (url: string, options: FetcherOptions): Promise<any> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open(options.method, url, true);
+    xhr.open(options.method, BASE_URL + url, true);
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -25,7 +27,7 @@ export const fetcher = (url: string, options: FetcherOptions): Promise<any> => {
 
     if (options.headers) {
       for (const key in options.headers) {
-        if (options.headers.hasOwnProperty(key)) {
+        if (Object.hasOwn(options.headers, key)) {
           xhr.setRequestHeader(key, options.headers[key]);
         }
       }
