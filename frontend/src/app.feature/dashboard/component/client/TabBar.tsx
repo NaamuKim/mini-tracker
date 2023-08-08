@@ -59,6 +59,8 @@ const StyledWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   width: 300px;
+
+  font-size: 18px;
   > a {
     height: 30px;
     position: relative;

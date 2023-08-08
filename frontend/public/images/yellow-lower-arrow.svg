@@ -1,0 +1,7 @@
+<svg width="40" height="30" viewBox="5 0 40 30" xmlns="http://www.w3.org/2000/svg">
+    <!-- Pointy arrowhead without a base with rounded ends pointing downwards -->
+    <line x1="15" y1="10" x2="25" y2="20" stroke="#FEBC2B" stroke-width="4" stroke-linecap="round"/>
+    <line x1="25" y1="20" x2="35" y2="10" stroke="#FEBC2B" stroke-width="4" stroke-linecap="round"/>
+    <!-- Column attached above the arrowhead -->
+    <rect x="23" y="0" width="4" height="20" fill="#FEBC2B" rx="2" ry="2"/>
+</svg>

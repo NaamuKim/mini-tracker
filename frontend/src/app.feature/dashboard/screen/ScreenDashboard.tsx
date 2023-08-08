@@ -21,6 +21,6 @@ const StyledWrapper = styled.section`
   flex-direction: column;
   padding: 40px;
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
 `;
