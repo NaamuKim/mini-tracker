@@ -14,10 +14,10 @@ const GoingPageView = () => {
             alt="outgoing-arrow"
           />
         </div>
-        <div>
+        <article>
           <h4>1200</h4>
-          <p>outgoing</p>
-        </div>
+          <p>Outgoing</p>
+        </article>
       </section>
       <section>
         <div className="arrow-wrapper yellow">
@@ -28,10 +28,10 @@ const GoingPageView = () => {
             alt="outgoing-arrow"
           />
         </div>
-        <div>
+        <article>
           <h4>2000</h4>
-          <p>incoming</p>
-        </div>
+          <p>Incoming</p>
+        </article>
       </section>
     </StyledWrapper>
   );
@@ -40,8 +40,17 @@ const GoingPageView = () => {
 export default GoingPageView;
 
 const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 30px;
+  padding: 30px;
+  background-color: var(--upper-background-color);
+  border-radius: 20px;
   section {
     display: flex;
+    align-items: center;
+    gap: 20px;
     > .arrow-wrapper {
       width: 40px;
       height: 40px;
@@ -54,6 +63,20 @@ const StyledWrapper = styled.div`
       }
       &.yellow {
         background-color: #3f3c2e;
+      }
+    }
+    > article {
+      display: flex;
+      flex-direction: column;
+      h4 {
+        font-size: 18px;
+        margin: 0;
+      }
+      p {
+        font-size: 12px;
+        margin-bottom: 0;
+        margin-top: 3px;
+        color: var(--text-secondary-color);
       }
     }
   }
