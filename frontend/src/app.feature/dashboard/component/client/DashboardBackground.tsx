@@ -14,7 +14,7 @@ const DashboardBackground: React.FC<TProps> = ({
 }) => {
   return (
     <StyledWrapper hasAnimation={hasAnimation}>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <div>{children}</div>
     </StyledWrapper>
   );
@@ -31,10 +31,11 @@ const StyledWrapper = styled.section<{ hasAnimation: boolean }>`
   background-color: var(--upper-background-color);
   z-index: 1;
   border-radius: 30px;
-  h2 {
+  h3 {
     width: 100%;
     margin: 0;
-    padding: 30px 0 0 30px;
+    padding: 35px 0 0 30px;
+    font-weight: 500;
   }
 
   > div {
