@@ -1,34 +1,23 @@
-+----------------+        +-------------+       +------------------+      +-----------------+
-|    Users       |        |  Sessions   |       |   UserEvents     |      | PageTransition |
-|----------------| 1    * |-------------| 1   * |------------------| 1   *| Events         |
-| id: int PK     |--------| id: int PK  |-------| id: int PK       |------| id: int PK     |
-| ip_address     |        | user_id: FK |       | user_id: FK      |      | user_event_id: FK |
-| user_agent     |        | start_time  |       | session_id: FK   |      |                |
-| created_at     |        | end_time    |       | event_type       |      | current_page   |
-| updated_at     |        +-------------+       | url              |      | previous_page  |
-+----------------+                              | referrer_url     |      | scrollY        |
-                                                |                  |      | scrollX        |
-                                                +------------------+      +-----------------+
-                                                                  |
-                                                                  |
-                                                                1|1
-                                                                  |
-                                                     +------------+------------+
-                                                     |   ClickEvents           |
-                                                     |-------------------------|
-                                                     | id: int PK              |
-                                                     | user_event_id: FK       |
-                                                     | button_id               |
-                                                     +-------------------------+
-                                                                  |
-                                                                  |
-                                                                1|1
-                                                                  |
-                                                     +------------+------------+
-                                                     | FormSubmissionEvents    |
-                                                     |-------------------------|
-                                                     | id: int PK              |
-                                                     | user_event_id: FK       |
-                                                     | form_id                 |
-                                                     | form_data               |
-                                                     +-------------------------+
++---------------+           +---------------+          +--------------------+
+|   Sessions    |           |   PageViews    |          |  PageTransitions   |
++---------------+           +---------------+          +--------------------+
+| PK SessionID  |<------1---| FK SessionID   |---1------| FK PageViewID_From  |
+| BaseURL       |     /|\   | PK PageViewID  |   /|\    | FK PageViewID_To    |
+| UserAgent     |      |    | BaseURL        |    |     | Date                |
+| AppVersion    |      |    | Referrer       |    |     | Time                |
+| StartTime     |      |    | PageLocation   |    |     | DOMElementClassName |
+| EndTime       |      |    | EntryTime      |    |     | DOMElementScreenshot|
++---------------+      |    | ExitTime       |    |     +--------------------+
+                       |    | Date           |
+                       |    | Time           |
+                       |    +---------------+
+                       |
+                       |
+                       | 1
+                       |
+                       |
+                   +------------+
+                   |  BaseURLs  |
+                   +------------+
+                   | BaseURL    |
+                   +------------+
