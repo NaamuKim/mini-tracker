@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id               Int           @id @default(autoincrement())
+  baseURL          String
+  userAgent        String
+  appVersion       String
+  sessionStartTime DateTime      @default(now())
+  sessionEndTime   DateTime?
+  pageViews        PageView[]
+}
+
+model PageView {
+  id              Int         @id @default(autoincrement())
+  session         Session     @relation(fields: [sessionId], references: [id])
+  sessionId       Int
+  baseURL         String
+  referrer        String?
+  pageLocation    String
+  entryTime       DateTime    @default(now())
+  exitTime        DateTime?
+  fromTransitions Transition[] @relation("FromPageViews")
+  toTransitions   Transition[] @relation("ToPageViews")
+}
+
+model Transition {
+  id                    Int      @id @default(autoincrement())
+  transitionTime        DateTime @default(now())
+  fromPageView          PageView @relation("FromPageViews", fields: [fromPageViewId], references: [id])
+  fromPageViewId        Int
+  toPageView            PageView @relation("ToPageViews", fields: [toPageViewId], references: [id])
+  toPageViewId          Int
+  DOMElementClassName   String?
+  DOMElementScreenshotURL String?
+}
