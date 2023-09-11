@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Session {
-  id               Int           @id @default(autoincrement())
-  baseURL          String
+  id               String        @id @default(uuid()) @map("id")
+  baseUrl         String
   userAgent        String
   appVersion       String
   sessionStartTime DateTime      @default(now())
@@ -20,8 +20,8 @@ model Session {
 model PageView {
   id              Int         @id @default(autoincrement())
   session         Session     @relation(fields: [sessionId], references: [id])
-  sessionId       Int
-  baseURL         String
+  sessionId       String
+  baseUrl         String
   referrer        String?
   pageLocation    String
   entryTime       DateTime    @default(now())

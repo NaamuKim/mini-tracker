@@ -1,4 +1,5 @@
-import mysql from "mysql2/promise";
-import { mySqlConfig } from "../env/env";
+import { PrismaClient } from "@prisma/client";
 
-export const pool = mysql.createPool(mySqlConfig);
+const prisma = new PrismaClient();
+
+export default prisma;
