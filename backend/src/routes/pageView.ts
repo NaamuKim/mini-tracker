@@ -9,7 +9,8 @@ import BadRequestError from "../errors/BadRequestError";
 const router = express.Router();
 app.post("/page-view", async (req, res, next) => {
   try {
-    const baseUrl = (req.headers["x-forwarded-host"] ||
+    const baseUrl = (req.body.baseUrl ||
+      req.headers["x-forwarded-host"] ||
       req.headers.host) as string;
 
     let sessionId = req.cookies[SESSION_COOKIE_KEY];
