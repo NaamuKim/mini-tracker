@@ -7,7 +7,7 @@ import { handlePageView } from "../services/pageView";
 import BadRequestError from "../errors/BadRequestError";
 
 const router = express.Router();
-app.post("/page-view", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const baseUrl = (req.body.baseUrl ||
       req.headers["x-forwarded-host"] ||
