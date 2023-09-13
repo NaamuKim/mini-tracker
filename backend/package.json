@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc --outDir dist",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --outdir dist --watch\" \"nodemon -q dist/index.js\""
+    "dev": "concurrently \"npx tsc --outdir dist --watch\" \"nodemon -q dist/index.js\"",
+    "test": "jest --watch --coverage"
   },
   "module": "esm",
   "keywords": [],
@@ -24,13 +25,18 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.4",
     "@types/node": "^20.4.2",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "concurrently": "^8.2.0",
     "eslint": "^8.46.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "prisma": "^5.2.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
   }
 }

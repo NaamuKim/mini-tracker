@@ -23,7 +23,6 @@ router.post("/", async (req, res, next) => {
       });
       res.cookie(SESSION_COOKIE_KEY, sessionId);
     }
-
     const { fromPageLocation } = req.body;
 
     if (!fromPageLocation) {
@@ -43,6 +42,7 @@ router.post("/", async (req, res, next) => {
   } catch (err) {
     console.error(err);
     if (err instanceof BadRequestError) {
+      console.log(err);
       return res.status(err.errorCode).json({
         message: err.message,
         success: false,
