@@ -1,4 +1,4 @@
-import prisma from "../config/db";
+import prisma from "@/config/db";
 import { Prisma } from "@prisma/client";
 
 export const createSession = ({

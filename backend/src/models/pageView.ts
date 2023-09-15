@@ -1,5 +1,5 @@
-import prisma from "../config/db";
 import { Prisma } from "@prisma/client";
+import prisma from "@/config/db";
 
 type CreatePageViewInput = Omit<Prisma.PageViewCreateInput, "session">;
 export const insertPageView = (

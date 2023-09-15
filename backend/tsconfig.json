@@ -7,8 +7,12 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
+
   "include": ["src/**/*", "__tests__/**/*"],
   "exclude": ["node_modules"]
 }

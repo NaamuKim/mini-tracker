@@ -1,6 +1,6 @@
 import { PageView } from "@prisma/client";
-import { insertPageView } from "../models/pageView";
-import BadRequestError from "../errors/BadRequestError";
+import { insertPageView } from "@/models/pageView";
+import BadRequestError from "@/errors/BadRequestError";
 
 export const handlePageView = async ({
   pageLocation,

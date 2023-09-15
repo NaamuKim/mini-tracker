@@ -1,8 +1,8 @@
 import express from "express";
-import { setupMiddleware } from "./middlewares/setup";
-import routes from "./routes";
-import userEventRoutes from "./routes/event";
-import pageViewRoutes from "./routes/pageView";
+import { setupMiddleware } from "@/middlewares/setup";
+import routes from "@/routes";
+import userEventRoutes from "@/routes/event";
+import pageViewRoutes from "@/routes/pageView";
 
 const app = express();
 

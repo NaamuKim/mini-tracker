@@ -1,11 +1,11 @@
-import { createSession } from "../models/session";
-import { SESSION_COOKIE_KEY } from "../constant/cookie";
-import { handleNewSession } from "../services/session";
+import { createSession } from "@/models/session";
+import { SESSION_COOKIE_KEY } from "@/constant/cookie";
+import { handleNewSession } from "@/services/session";
 import express from "express";
-import { handlePageView } from "../services/pageView";
+import { handlePageView } from "@/services/pageView";
 import BadRequestError from "../errors/BadRequestError";
-import { registerPageTransition } from "../services/pageTransition";
-import { PageTransitionCreateInputWithoutFromTo } from "../types/pageTransition";
+import { registerPageTransition } from "@/services/pageTransition";
+import { PageTransitionCreateInputWithoutFromTo } from "@/types/pageTransition";
 
 const router = express.Router();
 router.post("/", async (req, res, next) => {
