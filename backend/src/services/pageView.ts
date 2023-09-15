@@ -1,5 +1,5 @@
 import { PageView } from "@prisma/client";
-import { createPageView } from "../models/pageView";
+import { insertPageView } from "../models/pageView";
 import BadRequestError from "../errors/BadRequestError";
 
 export const handlePageView = async ({
@@ -15,7 +15,7 @@ export const handlePageView = async ({
   if (!pageLocation) {
     throw new BadRequestError("pageLocation is required");
   }
-  await createPageView(
+  await insertPageView(
     {
       pageLocation,
       baseUrl,
