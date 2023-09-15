@@ -7,6 +7,7 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "ignorePatterns": ["build.js", "node_modules/", "dist/", "jest.config.js"],
     "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
