@@ -5,7 +5,7 @@ import { PageTransitionCreateInputWithoutFromTo } from "@/types/pageTransition";
 export const insertPageTransition = ({
   pageTransitionInfo,
   fromPageViewId,
-  toPageViewInfo,
+  toPageViewInfo: { baseUrl, pageLocation, entryTime, referrer, sessionId },
 }: {
   pageTransitionInfo: PageTransitionCreateInputWithoutFromTo;
   fromPageViewId: PageView["id"];
@@ -19,7 +19,13 @@ export const insertPageTransition = ({
       },
     },
     toPageView: {
-      create: toPageViewInfo,
+      create: {
+        baseUrl,
+        pageLocation,
+        entryTime,
+        referrer,
+        sessionId,
+      },
     },
   };
   return prisma.pageTransition.create({

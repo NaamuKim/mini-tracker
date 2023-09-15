@@ -37,9 +37,7 @@ router.post("/", async (req, res, next) => {
 
     const pageTransition = await registerPageTransition(
       sessionId,
-      {
-        ...req.body,
-      },
+      { ...req.body },
       pageTransitionInfo,
     );
 

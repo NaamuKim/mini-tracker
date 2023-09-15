@@ -12,7 +12,10 @@ export const registerPageTransition = async (
   const pageTransition = await insertPageTransition({
     pageTransitionInfo,
     fromPageViewId,
-    toPageViewInfo,
+    toPageViewInfo: {
+      ...toPageViewInfo,
+      sessionId,
+    },
   });
   return pageTransition;
 };
