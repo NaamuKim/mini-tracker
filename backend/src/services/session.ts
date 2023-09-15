@@ -1,5 +1,5 @@
 import { Session } from "@prisma/client";
-import { createSession } from "../models/session";
+import { createSession } from "@/models/session";
 
 export const handleNewSession = async ({
   createSessionFn,

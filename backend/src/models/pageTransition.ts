@@ -1,6 +1,6 @@
 import { PageView, Prisma } from "@prisma/client";
-import prisma from "../config/db";
-import { PageTransitionCreateInputWithoutFromTo } from "../types/pageTransition";
+import prisma from "@/config/db";
+import { PageTransitionCreateInputWithoutFromTo } from "@/types/pageTransition";
 
 export const insertPageTransition = ({
   pageTransitionInfo,

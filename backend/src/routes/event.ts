@@ -1,10 +1,10 @@
 import express from "express";
-import { PageTransitionEvent } from "../types/userEvent";
+import { PageTransitionEvent } from "@/types/userEvent";
 import {
   createUserEvent,
   getPageTransitionBest5,
   getPageTransitionEvents,
-} from "../models/event";
+} from "@/models/event";
 
 const router = express.Router();
 

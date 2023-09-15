@@ -1,5 +1,5 @@
 import express from "express";
-import { hashLoginInfo, LoginInfo } from "../models/login";
+import { hashLoginInfo, LoginInfo } from "@/models/login";
 
 const router = express.Router();
 
