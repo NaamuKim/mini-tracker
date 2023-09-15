@@ -1,15 +1,15 @@
 import request from "supertest";
 import app from "../src/app";
 import { handleNewSession } from "../src/services/session";
-import { createPageView } from "../src/models/pageView";
+import { insertPageView } from "../src/models/pageView";
 
 jest.mock("../src/services/session");
 jest.mock("../src/models/pageView");
 const mockCreateSession = handleNewSession as jest.MockedFunction<
   typeof handleNewSession
 >;
-const mockCreatePageView = createPageView as jest.MockedFunction<
-  typeof createPageView
+const mockCreatePageView = insertPageView as jest.MockedFunction<
+  typeof insertPageView
 >;
 describe("POST /page-view", () => {
   it("모든 필수 파라미터가 존재하면 200번을 반환한다.", async () => {
