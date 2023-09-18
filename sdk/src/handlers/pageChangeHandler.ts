@@ -1,4 +1,4 @@
-import { UserPostedInfo } from "@/models/userPostedInfo";
+import { UserPostedInfo } from "@/api/models/userPostedInfo";
 import { sendPageTransitionInfoToServer } from "@/services/collector";
 import { IStorage } from "@/services/storage/IStorage";
 

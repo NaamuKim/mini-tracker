@@ -10,8 +10,8 @@ datasource db {
 model Session {
   id               String        @id @default(uuid()) @map("id")
   baseUrl          String
-  userAgent        String
-  appVersion       String
+  os        String
+  device       String
   sessionStartTime DateTime      @default(now())
   sessionEndTime   DateTime?
   pageViews        PageView[]

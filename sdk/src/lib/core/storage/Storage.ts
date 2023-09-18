@@ -1,8 +1,8 @@
-import { IStorage } from "./IStorage";
-import { LocalStorage } from "@/services/storage/LocalStorage";
-import { SessionStorage } from "@/services/storage/SessionStorage";
+import { IStorage } from "@/lib/core/storage/IStorage";
+import { LocalStorage } from "@/lib/core/storage/LocalStorage";
+import { SessionStorage } from "@/lib/core/storage/SessionStorage";
 
-export class Storage {
+class Storage {
   private storage: IStorage;
 
   constructor(storage: IStorage) {
@@ -45,3 +45,5 @@ export class Storage {
     this.storage.removeItem(key);
   }
 }
+
+export default Storage;
