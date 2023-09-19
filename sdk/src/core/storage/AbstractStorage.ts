@@ -1,8 +1,8 @@
-import { IStorage } from "@/lib/core/storage/IStorage";
-import { LocalStorage } from "@/lib/core/storage/LocalStorage";
-import { SessionStorage } from "@/lib/core/storage/SessionStorage";
+import { IStorage } from "@/core/storage/IStorage";
+import { LocalStorage } from "@/core/storage/LocalStorage";
+import { SessionStorage } from "@/core/storage/SessionStorage";
 
-class Storage {
+class AbstractStorage {
   private storage: IStorage;
 
   constructor(storage: IStorage) {
@@ -21,10 +21,10 @@ class Storage {
     }
   }
 
-  public static getAvailableStorage(): Storage | null {
+  public static getAvailableStorage(): AbstractStorage | null {
     for (const storage of [new LocalStorage(), new SessionStorage()]) {
-      if (Storage.isAvailable(storage)) {
-        return new Storage(storage);
+      if (AbstractStorage.isAvailable(storage)) {
+        return new AbstractStorage(storage);
       }
     }
     return null;
@@ -46,4 +46,4 @@ class Storage {
   }
 }
 
-export default Storage;
+export default AbstractStorage;

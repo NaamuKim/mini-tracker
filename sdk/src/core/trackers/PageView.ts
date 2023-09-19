@@ -1,5 +1,5 @@
 import EventDispatcher from "@/core/EventDispatcher";
-import Storage from "@/core/storage";
+import AbstractStorage from "@/core/storage";
 import { MINI_TRACKER_SERVER_API } from "@/api/ApiClient";
 import { API_PAGE_VIEW } from "@/api/endPoint/api";
 import { PageView } from "@/api/models/pageView";
@@ -10,8 +10,8 @@ import { parseOS } from "@/utils/parsers/os";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
-  storage: Storage;
-  constructor(eventDispatcher: EventDispatcher, storage: Storage) {
+  storage: AbstractStorage;
+  constructor(eventDispatcher: EventDispatcher, storage: AbstractStorage) {
     this.eventDispatcher = eventDispatcher;
     this.storage = storage;
   }

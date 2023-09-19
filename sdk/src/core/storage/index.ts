@@ -1,3 +1,3 @@
-import Storage from "@/lib/core/storage/Storage";
+import AbstractStorage from "@/core/storage/AbstractStorage";
 
-export default Storage;
+export default AbstractStorage;
