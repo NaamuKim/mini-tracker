@@ -1,5 +1,7 @@
-type ListenerFn = (event: unknown) => void;
-type EventTypes = "page-view" | "page-transition";
+import { EVENT_KEYS } from "@/constants/event";
+
+type ListenerFn = (event: Event) => void;
+type EventTypes = (typeof EVENT_KEYS)[keyof typeof EVENT_KEYS];
 
 class EventDispatcher {
   private static instance: EventDispatcher;
@@ -33,8 +35,8 @@ class EventDispatcher {
   }
 
   attachEventToElement(
-    element: HTMLElement | Window,
-    eventName: string,
+    element: Element | Window | Document,
+    eventName: keyof DocumentEventMap,
     type: EventTypes,
   ) {
     const handlers = this.listeners[type];
