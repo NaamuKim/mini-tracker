@@ -1,9 +1,9 @@
-import IOCContainer from "@/lib/core/container/IOCContatiner";
-import SDKInitializer from "@/lib/core/SDKInitializer";
-import Storage from "@/lib/core/storage";
+import IOCContainer from "@/core/container/IOCContatiner";
+import SDKInitializer from "@/core/SDKInitializer";
+import AbstractStorage from "@/core/storage";
 
 const main = () => {
-  const availableStorage = Storage.getAvailableStorage();
+  const availableStorage = AbstractStorage.getAvailableStorage();
   if (!availableStorage) {
     throw new Error("No available storage");
   }
