@@ -3,6 +3,7 @@ import EventDispatcher from "@/core/EventDispatcher";
 import IOCContainer from "@/core/container/IOCContatiner";
 import PageViewTracker from "@/core/trackers/PageView";
 import AbstractStorage from "@/core/storage";
+import { IOC_DEPENDENCIES_KEYS } from "@/constants/ioc";
 
 class SDKInitializer {
   private readonly eventDispatcher: EventDispatcher;
@@ -10,8 +11,9 @@ class SDKInitializer {
 
   constructor() {
     this.eventDispatcher = EventDispatcher.getInstance();
-    this.storage =
-      IOCContainer.getInstance().resolve<AbstractStorage>("Storage");
+    this.storage = IOCContainer.getInstance().resolve<AbstractStorage>(
+      IOC_DEPENDENCIES_KEYS.STORAGE,
+    );
     this.initialize();
   }
 
