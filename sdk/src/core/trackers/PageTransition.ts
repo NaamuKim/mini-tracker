@@ -32,7 +32,7 @@ class PageTransitionTracker {
   private addSaveFromPageLocationEvent() {
     this.eventDispatcher.subscribe(
       "page-transition-load",
-      this.setFromPage.bind(this),
+      this.setFromPageLocation.bind(this),
     );
     this.eventDispatcher.attachEventToElement(
       window,
@@ -41,7 +41,7 @@ class PageTransitionTracker {
     );
   }
 
-  private setFromPage() {
+  private setFromPageLocation() {
     const url = new URL(window.location.href);
     this.storage.setItem(
       "fromPageLocation",
