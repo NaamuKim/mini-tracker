@@ -2,6 +2,7 @@ import EventDispatcher from "@/core/EventDispatcher";
 import { getQuerySelector } from "@/utils/parsers/dom";
 import { EVENT_KEYS } from "@/constants/event";
 import AbstractStorage from "@/core/storage";
+import { STORAGE_KEYS } from "@/constants/storage";
 
 class PageTransitionTracker {
   private readonly eventDispatcher: EventDispatcher;
@@ -44,14 +45,17 @@ class PageTransitionTracker {
   private setFromPageLocation() {
     const url = new URL(window.location.href);
     this.storage.setItem(
-      "fromPageLocation",
+      STORAGE_KEYS.FROM_PAGE_LOCATION,
       url.pathname + url.search + url.hash,
     );
   }
 
   private setElementSelector(event: Event) {
     const target = event.target as Element;
-    this.storage.setItem("elementSelector", getQuerySelector(target));
+    this.storage.setItem(
+      STORAGE_KEYS.ELEMENT_SELECTOR,
+      getQuerySelector(target),
+    );
   }
 }
 
