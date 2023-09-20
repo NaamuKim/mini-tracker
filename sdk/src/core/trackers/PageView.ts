@@ -7,6 +7,7 @@ import { Session } from "@/api/models/session";
 import { PageTransition } from "@/api/models/pageTransition";
 import { parseDevice } from "@/utils/parsers/device";
 import { parseOS } from "@/utils/parsers/os";
+import { EVENT_KEYS } from "@/constants/event";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
@@ -17,8 +18,15 @@ class PageViewTracker {
   }
 
   initialize() {
-    this.eventDispatcher.subscribe("page-view-load", this.tagData.bind(this));
-    this.eventDispatcher.attachEventToElement(window, "load", "page-view-load");
+    this.eventDispatcher.subscribe(
+      EVENT_KEYS.PAGE_VIEW_LOAD,
+      this.tagData.bind(this),
+    );
+    this.eventDispatcher.attachEventToElement(
+      window,
+      "load",
+      EVENT_KEYS.PAGE_VIEW_LOAD,
+    );
   }
 
   tagData() {
