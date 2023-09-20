@@ -23,14 +23,14 @@ const watcher = chokidar.watch(watchSdkDir, {
 (async () => {
   const SDKBuilder = await esbuild.context({
     bundle: true,
-    outdir: path.join(process.cwd(), "dist/mini-tracker.js"),
+    outfile: path.join(process.cwd(), "dist/mini-tracker-sdk.js"),
     entryPoints: [path.join(process.cwd(), "src/index.ts")],
   });
 
   watcher.on("change", async (filePath) => {
     console.log(`SDK File changed: ${filePath}`);
     try {
-      SDKBuilder.rebuild();
+      await SDKBuilder.rebuild();
       console.log("SDK build successful.");
 
       wss.clients.forEach((client) => {
