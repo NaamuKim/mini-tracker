@@ -31,13 +31,13 @@ class PageTransitionTracker {
 
   private addSaveFromPageLocationEvent() {
     this.eventDispatcher.subscribe(
-      "page-transition-load",
+      EVENT_KEYS.PAGE_TRANSITION_LOAD,
       this.setFromPageLocation.bind(this),
     );
     this.eventDispatcher.attachEventToElement(
       window,
       "load",
-      "page-transition-load",
+      EVENT_KEYS.PAGE_TRANSITION_LOAD,
     );
   }
 
