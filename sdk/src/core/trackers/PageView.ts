@@ -35,7 +35,7 @@ class PageViewTracker {
 
     const fromPageLocation = this.storage.getItem("fromPageLocation");
 
-    if (fromPageLocation) {
+    if (fromPageLocation && fromPageLocation !== pageViewData.pageLocation) {
       const pageTransitionData: PageTransition & {
         fromPageLocation: string;
       } = {
@@ -44,7 +44,7 @@ class PageViewTracker {
         fromPageLocation,
       };
 
-      MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
+      return MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
         body: {
           ...pageViewData,
           ...pageTransitionData,
@@ -52,7 +52,7 @@ class PageViewTracker {
       });
     }
 
-    MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
+    return MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
       body: {
         ...pageViewData,
       },
