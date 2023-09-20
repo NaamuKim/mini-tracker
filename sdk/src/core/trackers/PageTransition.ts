@@ -1,12 +1,13 @@
 import EventDispatcher from "@/core/EventDispatcher";
 import { getQuerySelector } from "@/utils/parsers/dom";
 import { EVENT_KEYS } from "@/constants/event";
+import AbstractStorage from "@/core/storage";
 
 class PageTransitionTracker {
   private readonly eventDispatcher: EventDispatcher;
-  private readonly storage: Storage;
+  private readonly storage: AbstractStorage;
 
-  constructor(eventDispatcher: EventDispatcher, storage: Storage) {
+  constructor(eventDispatcher: EventDispatcher, storage: AbstractStorage) {
     this.eventDispatcher = eventDispatcher;
     this.storage = storage;
   }

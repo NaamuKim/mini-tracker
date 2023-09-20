@@ -2,14 +2,16 @@ import PageTransitionTracker from "@/core/trackers/PageTransition";
 import EventDispatcher from "@/core/EventDispatcher";
 import IOCContainer from "@/core/container/IOCContatiner";
 import PageViewTracker from "@/core/trackers/PageView";
+import AbstractStorage from "@/core/storage";
 
 class SDKInitializer {
   private readonly eventDispatcher: EventDispatcher;
-  private readonly storage: Storage;
+  private readonly storage: AbstractStorage;
 
   constructor() {
     this.eventDispatcher = EventDispatcher.getInstance();
-    this.storage = IOCContainer.getInstance().resolve<Storage>("Storage");
+    this.storage =
+      IOCContainer.getInstance().resolve<AbstractStorage>("Storage");
     this.initialize();
   }
 
