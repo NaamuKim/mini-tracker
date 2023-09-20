@@ -16,11 +16,19 @@ class SDKInitializer {
   }
 
   private initialize() {
+    this.pageViewTrackerInitialize();
+    this.pageTransitionTrackerInitialize();
+  }
+
+  pageViewTrackerInitialize() {
     const pageViewTracker = new PageViewTracker(
       this.eventDispatcher,
       this.storage,
     );
     pageViewTracker.initialize();
+  }
+
+  pageTransitionTrackerInitialize() {
     const pageTransitionTracker = new PageTransitionTracker(
       this.eventDispatcher,
       this.storage,
