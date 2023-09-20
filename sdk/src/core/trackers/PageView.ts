@@ -8,6 +8,7 @@ import { PageTransition } from "@/api/models/pageTransition";
 import { parseDevice } from "@/utils/parsers/device";
 import { parseOS } from "@/utils/parsers/os";
 import { EVENT_KEYS } from "@/constants/event";
+import { STORAGE_KEYS } from "@/constants/storage";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
@@ -41,14 +42,18 @@ class PageViewTracker {
       device: parseDevice(navigator.userAgent),
     };
 
-    const fromPageLocation = this.storage.getItem("fromPageLocation");
+    const fromPageLocation = this.storage.getItem(
+      STORAGE_KEYS.FROM_PAGE_LOCATION,
+    );
 
     if (fromPageLocation && fromPageLocation !== pageViewData.pageLocation) {
       const pageTransitionData: PageTransition & {
         fromPageLocation: string;
       } = {
         transitionTime: new Date(),
-        elementSelector: this.storage.getItem("elementSelector") as string,
+        elementSelector: this.storage.getItem(
+          STORAGE_KEYS.ELEMENT_SELECTOR,
+        ) as string,
         fromPageLocation,
       };
 
