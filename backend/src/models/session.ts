@@ -2,12 +2,12 @@ import prisma from "@/config/db";
 import { Prisma } from "@prisma/client";
 
 export const createSession = ({
-  userAgent,
-  appVersion,
+  os,
+  device,
   baseUrl,
 }: Prisma.SessionCreateInput) => {
   const session = prisma.session.create({
-    data: { userAgent, appVersion, baseUrl },
+    data: { os, device, baseUrl },
   });
   return session;
 };

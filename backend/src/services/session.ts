@@ -10,10 +10,10 @@ export const handleNewSession = async ({
   reqBody: Session;
   baseUrl: string;
 }): Promise<string> => {
-  const { userAgent, appVersion, sessionStartTime } = reqBody;
+  const { os, device, sessionStartTime } = reqBody;
   const session = await createSessionFn({
-    userAgent,
-    appVersion,
+    os,
+    device,
     baseUrl,
     sessionStartTime,
   });
