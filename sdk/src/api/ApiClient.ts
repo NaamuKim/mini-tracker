@@ -68,6 +68,7 @@ class ApiClient {
         }
       }
       xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.withCredentials = true;
       xhr.send(options.body ? JSON.stringify(options.body) : null);
     });
   }
