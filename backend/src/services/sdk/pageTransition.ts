@@ -1,6 +1,6 @@
 import { PageView } from "@prisma/client";
-import { insertPageTransition } from "@/models/pageTransition";
-import { findRecentPageViewBySession } from "@/models/pageView";
+import { insertPageTransition } from "@/models/sdk/pageTransition";
+import { findRecentPageViewBySession } from "@/models/sdk/pageView";
 import { PageTransitionCreateInputWithoutFromTo } from "@/types/pageTransition";
 
 export const registerPageTransition = async (

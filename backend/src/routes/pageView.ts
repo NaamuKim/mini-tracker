@@ -1,5 +1,5 @@
 import express from "express";
-import { createSession } from "@/models/session";
+import { createSession } from "@/models/sdk/session";
 import { SESSION_COOKIE_KEY } from "@/constant/cookie";
 import { PageTransitionCreateInputWithoutFromTo } from "@/types/pageTransition";
 import { handleNewSession } from "@/services/sdk/session";
