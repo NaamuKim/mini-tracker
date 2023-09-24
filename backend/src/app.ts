@@ -1,13 +1,17 @@
 import express from "express";
 import { setupMiddleware } from "@/middlewares/setup";
-import routes from "@/routes";
-import pageViewRoutes from "@/routes/pageView";
+import { dashboardRouter } from "@/routes/dashboard";
+import { sdkRouter } from "@/routes/sdk";
 
 const app = express();
 
 setupMiddleware(app);
 
-app.use("/", routes);
-app.use("/page-view", pageViewRoutes);
+// SDK Routes
+app.use("/page-view", sdkRouter.pageViewRouter);
+
+// Dashboard Routes
+app.use("/dashboard/login", dashboardRouter.loginRouter);
+app.use("/dashboard/overview", dashboardRouter.overviewRouter);
 
 export default app;
