@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = 'http://localhost:8080/dashboard';
 
 export const fetcher = <T>({
   url,
@@ -6,7 +6,7 @@ export const fetcher = <T>({
   body,
 }: {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   body?: any;
 }): Promise<T> => {
   try {
@@ -14,9 +14,9 @@ export const fetcher = <T>({
       method,
       body: JSON.stringify(body),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      credentials: "include",
+      credentials: 'include',
     }).then((res) => res.json());
   } catch (err) {
     console.error(err);

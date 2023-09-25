@@ -1,33 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import DailyViewLineChart from './overview/DailyViewLineChart';
 
 const Dashboards = () => (
   <StyledWrapper>
-    <ResponsiveContainer width='100%' height={300}>
-      <LineChart
-        data={[
-          { name: '09.20', view: 2000 },
-          {
-            name: '09.21',
-            view: 2300,
-          },
-          { name: '09.22', view: 1200 },
-          { name: '09.23', view: 1400 },
-          { name: '09.24', view: 3200 },
-          { name: '09.25', view: 2500 },
-          { name: '09.26', view: 1300 },
-          { name: '09.27', view: 3200 },
-        ]}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <XAxis dataKey='name' />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type='monotone' dataKey='view' stroke='var(--link-color)' />
-      </LineChart>
-    </ResponsiveContainer>
+    <DailyViewLineChart />
     {/* <DashboardBackground title="Top Pages">
           <SimpleBarChart
             data={[
