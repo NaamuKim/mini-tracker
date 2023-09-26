@@ -4,14 +4,11 @@ import React from 'react';
 import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import useQueryFn from '@/app.module/react-query/useQueryFn';
 import { API_DAILY_VIEW } from '@/app.module/constant/api/app.dashboard';
-import { formatMMDD } from '@/app.module/utils/date';
+import { formatMMDD, formatYYYYMMDD, getNextDay, getSevenDaysAgo } from '@/app.module/utils/date';
 
 const DailyViewLineChart = () => {
   const { data: dailyViewData } = useQueryFn<
-    Array<{
-      date: Date;
-      count: number;
-    }>,
+    { data: { visitors: Array<{ date: Date; count: number }> } },
     Array<{
       name: string;
       viewCount: number;
@@ -20,13 +17,13 @@ const DailyViewLineChart = () => {
     [
       API_DAILY_VIEW,
       {
-        startDate: '2023-09-21',
-        endDate: '2023-09-23',
+        startDate: formatYYYYMMDD(getSevenDaysAgo(new Date())),
+        endDate: formatYYYYMMDD(getNextDay(new Date())),
       },
     ],
     {
-      select: (data) => {
-        return data.data.visitors.map((item) => ({
+      select: (res) => {
+        return res.data.visitors.map((item) => ({
           name: formatMMDD(new Date(item.date)),
           viewCount: item.count,
         }));
