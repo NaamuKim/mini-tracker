@@ -13,7 +13,7 @@ import {
   SankeyData,
 } from "@/app.feature/dashboard.entry/module/format";
 import { PageTransition } from "@/app.feature/dashboard.entry/types/pageTransition";
-import { API_SANKEY_TRANSITION } from "@/app.module/constant/api/app.dashboard";
+import { API_SANKEY_TRANSITION } from "@/app.module/constant/api/app.dashboard/transition";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 
 const SankeyPageTransition = () => {

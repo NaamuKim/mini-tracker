@@ -11,13 +11,13 @@ import {
   YAxis,
 } from "recharts";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
-import { API_DAILY_VIEW } from "@/app.module/constant/api/app.dashboard";
 import {
   formatMMDD,
   formatYYYYMMDD,
   getNextDay,
   getSevenDaysAgo,
 } from "@/app.module/utils/date";
+import { API_DAILY_VIEW } from "@/app.module/constant/api/app.dashboard/overview";
 
 const DailyViewLineChart = () => {
   const { data: dailyViewData } = useQueryFn<
