@@ -21,7 +21,7 @@ import {
 
 const DailyViewLineChart = () => {
   const { data: dailyViewData } = useQueryFn<
-    { data: { visitors: Array<{ date: Date; count: number }> } },
+    { visitors: Array<{ date: Date; count: number }> },
     Array<{
       name: string;
       viewCount: number;
@@ -36,7 +36,7 @@ const DailyViewLineChart = () => {
     ],
     {
       select: (res) => {
-        return res.data.visitors.map((item) => ({
+        return res.visitors.map((item) => ({
           name: formatMMDD(new Date(item.date)),
           viewCount: item.count,
         }));
