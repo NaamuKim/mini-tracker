@@ -4,7 +4,7 @@ import { fetcher } from "@/app.module/fetcher";
 const objectToQueryParamString = (
   obj?: Record<string, string | number | boolean>,
 ) => {
-  if (!obj) return null;
+  if (!obj) return "";
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(obj)) {
     params.append(key, String(value));

@@ -8,12 +8,9 @@ import {
   PieLabelRenderProps,
 } from "recharts";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
-
-const data = [
-  { name: "page3", value: 400 },
-  { name: "page2", value: 567 },
-  { name: "page4", value: 15 },
-];
+import useQueryFn from "@/app.module/react-query/useQueryFn";
+import { API_TOP_STAYED } from "@/app.module/constant/api/app.dashboard/overview";
+import { TTopStayed } from "@/app.feature/dashboard.overview/module/type/APIResponseType";
 
 const COLORS = [
   "var(--sub-color)",
@@ -50,8 +47,24 @@ const renderLabel = ({
 };
 
 const SessionGaugeChart = () => {
+  const { data: mostStayedPages } = useQueryFn<
+    TTopStayed,
+    Array<{
+      name: string;
+      value: number;
+    }>
+  >([API_TOP_STAYED], {
+    select: (data) =>
+      data.topStayed.map((item) => ({
+        name: item.pageLocation.startsWith("/")
+          ? item.pageLocation.slice(1)
+          : item.pageLocation,
+        value: item.duration,
+      })),
+  });
+
   return (
-    <DashboardBackground width="30%" title={"Long Stayed Pages"}>
+    <DashboardBackground width="30%" title="Long Stayed Pages">
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
@@ -62,13 +75,13 @@ const SessionGaugeChart = () => {
             fill="#8884d8"
             cx="50%"
             cy="70%"
-            data={data}
+            data={mostStayedPages}
             labelLine={false}
             label={renderLabel}
           >
-            {data.map((entry, index) => (
+            {mostStayedPages?.map((entry, index) => (
               <Cell
-                key={`cell-${index}`}
+                key={`mostStayedCell-${index}`}
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
