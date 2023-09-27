@@ -1,10 +1,23 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import useQueryFn from '@/app.module/react-query/useQueryFn';
-import { API_DAILY_VIEW } from '@/app.module/constant/api/app.dashboard';
-import { formatMMDD, formatYYYYMMDD, getNextDay, getSevenDaysAgo } from '@/app.module/utils/date';
+import React from "react";
+import {
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import useQueryFn from "@/app.module/react-query/useQueryFn";
+import { API_DAILY_VIEW } from "@/app.module/constant/api/app.dashboard";
+import {
+  formatMMDD,
+  formatYYYYMMDD,
+  getNextDay,
+  getSevenDaysAgo,
+} from "@/app.module/utils/date";
 
 const DailyViewLineChart = () => {
   const { data: dailyViewData } = useQueryFn<
@@ -28,17 +41,20 @@ const DailyViewLineChart = () => {
           viewCount: item.count,
         }));
       },
-    }
+    },
   );
 
   return (
-    <ResponsiveContainer width='100%' height={300}>
-      <LineChart data={dailyViewData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <XAxis dataKey='name' />
+    <ResponsiveContainer width="70%" height={300}>
+      <LineChart
+        data={dailyViewData}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+      >
+        <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type='monotone' dataKey='viewCount' stroke='var(--link-color)' />
+        <Line type="monotone" dataKey="viewCount" stroke="var(--link-color)" />
       </LineChart>
     </ResponsiveContainer>
   );
