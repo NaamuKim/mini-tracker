@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Label } from "recharts";
 
 type TProps = {
   title: string | React.ReactNode;
   children: React.ReactNode;
   hasAnimation?: boolean;
-  width: string | number;
+  width?: string | number;
 };
 
 const DashboardBackground: React.FC<TProps> = ({
@@ -22,8 +21,6 @@ const DashboardBackground: React.FC<TProps> = ({
     </StyledWrapper>
   );
 };
-
-export default DashboardBackground;
 
 const StyledWrapper = styled.section<{
   hasAnimation: boolean;
@@ -55,3 +52,5 @@ const StyledWrapper = styled.section<{
     }
   }
 `;
+
+export default DashboardBackground;

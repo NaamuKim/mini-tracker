@@ -1,11 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
-import ScreenDashboard from "@/app.feature/dashboard/screen/ScreenDashboard";
+import ScreenDashboardEntry from "@/app.feature/dashboard.entry/screen/ScreenDashboardEntry";
 
 const DashboardPage: NextPage = () => {
   return (
     <>
-      <ScreenDashboard />
+      <ScreenDashboardEntry />
     </>
   );
 };

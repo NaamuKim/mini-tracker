@@ -1,4 +1,4 @@
-import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
+import { PageTransition } from "@/app.feature/dashboard.entry/types/pageTransition";
 
 interface SankeyLink {
   source: number;
