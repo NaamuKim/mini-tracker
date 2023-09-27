@@ -72,7 +72,7 @@ router.get("/top-stayed", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Internal server error",
+      message: (err as Error)?.message || "Internal server error",
     });
   }
 });
