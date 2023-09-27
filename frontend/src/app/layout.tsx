@@ -8,6 +8,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>mini tracker</title>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body suppressHydrationWarning={true}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
