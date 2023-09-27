@@ -1,9 +1,9 @@
 import React from "react";
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
-import { BestPageTransition } from "@/app.feature/dashboard/types/pageTransition";
-import DashboardBackground from "@/app.feature/dashboard/component/client/DashboardBackground";
+import { BestPageTransition } from "@/app.feature/dashboard.entry/types/pageTransition";
 import { API_BEST_BARS_TRANSITION } from "@/app.module/constant/api/app.dashboard";
+import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 
 const BarPageTransition = () => {
   const { data } = useQueryFn<

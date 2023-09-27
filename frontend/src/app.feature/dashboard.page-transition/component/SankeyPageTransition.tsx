@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import DashboardBackground from "@/app.feature/dashboard/component/client/DashboardBackground";
 import {
   Layer,
   Rectangle,
@@ -12,9 +11,10 @@ import useQueryFn from "@/app.module/react-query/useQueryFn";
 import {
   formatDataForSankeyChart,
   SankeyData,
-} from "@/app.feature/dashboard/module/format";
-import { PageTransition } from "@/app.feature/dashboard/types/pageTransition";
+} from "@/app.feature/dashboard.entry/module/format";
+import { PageTransition } from "@/app.feature/dashboard.entry/types/pageTransition";
 import { API_SANKEY_TRANSITION } from "@/app.module/constant/api/app.dashboard";
+import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 
 const SankeyPageTransition = () => {
   const { data } = useQueryFn<PageTransition[], SankeyData>(

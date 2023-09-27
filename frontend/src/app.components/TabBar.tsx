@@ -34,12 +34,24 @@ const isCurrentTab = ({
 const TabBar = () => {
   const currentTab = useSearchParams().get("tab") || "overview";
 
+  const handleClickLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (href === TabNames[1].href || href === TabNames[2].href) {
+      alert("This feature is still in development");
+      return;
+    }
+
+    window.history.pushState(null, "", href);
+  };
+
   return (
     <StyledWrapper>
       {TabNames.map((tab) => (
         <Link
           key={tab.name}
           href={tab.href}
+          onClick={handleClickLink}
           className={
             isCurrentTab({ tabParam: tab.param, currentTab })
               ? "active"

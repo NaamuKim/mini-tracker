@@ -1,6 +1,6 @@
 "use client";
 
-import "@/app.feature/dashboard/style/reset.css";
+import "@/app.feature/dashboard.entry/style/reset.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ApiError } from "@/app.module/class/ApiError";
 import { useRef } from "react";

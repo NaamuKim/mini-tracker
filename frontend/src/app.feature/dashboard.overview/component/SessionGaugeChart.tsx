@@ -7,7 +7,7 @@ import {
   Tooltip,
   PieLabelRenderProps,
 } from "recharts";
-import DashboardBackground from "@/app.feature/dashboard/component/client/DashboardBackground";
+import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 
 const data = [
   { name: "page3", value: 400 },
