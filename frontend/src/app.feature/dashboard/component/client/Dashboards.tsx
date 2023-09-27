@@ -1,10 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import DailyViewLineChart from './overview/DailyViewLineChart';
+import React from "react";
+import styled from "styled-components";
+import DailyViewLineChart from "./overview/DailyViewLineChart";
+import SessionGaugeChart from "@/app.feature/dashboard/component/client/overview/SessionGaugeChart";
 
 const Dashboards = () => (
   <StyledWrapper>
-    <DailyViewLineChart />
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <DailyViewLineChart />
+      <SessionGaugeChart />
+    </div>
+
     {/* <DashboardBackground title="Top Pages">
           <SimpleBarChart
             data={[
