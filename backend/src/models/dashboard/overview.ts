@@ -37,24 +37,20 @@ export const findVisitors = async ({
 };
 
 export const findTopStayed = async (limit: number) => {
-  try {
-    const result = await prisma.$queryRaw<
-      Array<{
-        pageLocation: string;
-        duration: bigint;
-      }>
-    >`
-      SELECT 
-        pageLocation, 
-        TIMESTAMPDIFF(SECOND, entryTime, COALESCE(exitTime, DATE_ADD(entryTime, INTERVAL 10 MINUTE))) as duration 
-      FROM PageView 
-      ORDER BY duration DESC 
-      LIMIT ${limit};
-    `;
+  const result = await prisma.$queryRaw<
+    Array<{
+      pageLocation: string;
+      duration: bigint;
+    }>
+  >`
+    SELECT
+        pageLocation,
+        SUM(TIMESTAMPDIFF(SECOND, entryTime, COALESCE(exitTime, DATE_ADD(entryTime, INTERVAL 10 MINUTE)))) / COUNT(*) as duration
+    FROM PageView
+    GROUP BY pageLocation
+    ORDER BY duration DESC
+    LIMIT ${limit};
+  `;
 
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return result;
 };
