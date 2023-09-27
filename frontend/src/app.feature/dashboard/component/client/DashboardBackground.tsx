@@ -1,19 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { Label } from "recharts";
 
 type TProps = {
   title: string | React.ReactNode;
   children: React.ReactNode;
   hasAnimation?: boolean;
+  width: string | number;
 };
 
 const DashboardBackground: React.FC<TProps> = ({
   children,
   title,
   hasAnimation = false,
+  width = "100%",
 }) => {
   return (
-    <StyledWrapper hasAnimation={hasAnimation}>
+    <StyledWrapper hasAnimation={hasAnimation} width={width}>
       <h3>{title}</h3>
       <div>{children}</div>
     </StyledWrapper>
@@ -22,25 +25,23 @@ const DashboardBackground: React.FC<TProps> = ({
 
 export default DashboardBackground;
 
-const StyledWrapper = styled.section<{ hasAnimation: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1000px;
+const StyledWrapper = styled.section<{
+  hasAnimation: boolean;
+  width: number | string;
+}>`
+  position: relative;
+  width: ${({ width }) => width};
   height: fit-content;
   background-color: var(--upper-background-color);
-  z-index: 1;
-  border-radius: 30px;
+  border-radius: 1vw;
   h3 {
-    width: 100%;
+    position: absolute;
     margin: 0;
-    padding: 35px 0 0 30px;
+    top: 30px;
+    left: 25px;
+    display: flex;
+    font-size: 16px;
     font-weight: 500;
-  }
-
-  > div {
-    width: 100%;
-    padding: 30px;
   }
 
   animation: ${({ hasAnimation }) => hasAnimation && "fadein 2s"};
