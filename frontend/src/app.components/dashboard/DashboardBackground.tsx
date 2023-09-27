@@ -11,11 +11,11 @@ type TProps = {
 const DashboardBackground: React.FC<TProps> = ({
   children,
   title,
-  hasAnimation = false,
+  hasAnimation,
   width = "100%",
 }) => {
   return (
-    <StyledWrapper hasAnimation={hasAnimation} width={width}>
+    <StyledWrapper width={width}>
       <h3>{title}</h3>
       <div>{children}</div>
     </StyledWrapper>
@@ -23,7 +23,6 @@ const DashboardBackground: React.FC<TProps> = ({
 };
 
 const StyledWrapper = styled.section<{
-  hasAnimation: boolean;
   width: number | string;
 }>`
   position: relative;
@@ -40,8 +39,6 @@ const StyledWrapper = styled.section<{
     font-size: 16px;
     font-weight: 500;
   }
-
-  animation: ${({ hasAnimation }) => hasAnimation && "fadein 2s"};
 
   @keyframes fadein {
     from {
