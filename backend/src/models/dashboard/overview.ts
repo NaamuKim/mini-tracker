@@ -1,6 +1,6 @@
-import prisma from '@/config/db';
-import { Prisma } from '@prisma/client';
-import { VisitorsQueryParamsDTO } from '@/types/DTO/dashboard/overview';
+import prisma from "@/config/db";
+import { Prisma } from "@prisma/client";
+import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
 
 export const findVisitors = async ({
   startDate,
@@ -13,7 +13,9 @@ export const findVisitors = async ({
   }>
 > => {
   const sortingClause =
-    sort === 'asc' ? Prisma.sql`ORDER BY Date(entryTime) ASC` : Prisma.sql`ORDER BY Date(entryTime) DESC`;
+    sort === "asc"
+      ? Prisma.sql`ORDER BY Date(entryTime) ASC`
+      : Prisma.sql`ORDER BY Date(entryTime) DESC`;
 
   const visitors = await prisma.$queryRaw<
     Array<{
@@ -32,4 +34,27 @@ export const findVisitors = async ({
     ...visitor,
     count: Number(visitor.count),
   }));
+};
+
+export const findTopStayed = async (limit: number) => {
+  try {
+    const result = await prisma.$queryRaw<
+      Array<{
+        pageLocation: string;
+        duration: bigint;
+      }>
+    >`
+      SELECT 
+        pageLocation, 
+        TIMESTAMPDIFF(SECOND, entryTime, COALESCE(exitTime, DATE_ADD(entryTime, INTERVAL 10 MINUTE))) as duration 
+      FROM PageView 
+      ORDER BY duration DESC 
+      LIMIT ${limit};
+    `;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };

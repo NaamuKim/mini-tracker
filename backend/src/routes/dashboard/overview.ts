@@ -1,5 +1,8 @@
 import express from "express";
-import { retrieveVisitors } from "@/services/dashboard/overview";
+import {
+  retrieveTopStayed,
+  retrieveVisitors,
+} from "@/services/dashboard/overview";
 import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
 import { validateVisitorsQueryParam } from "@/middlewares/validators/dashboard/overview";
 
@@ -44,6 +47,26 @@ router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
       success: true,
       data: {
         visitors,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
+router.get("/top-stayed", async (req, res) => {
+  try {
+    const { limit = 5 } = req.query;
+    const parsedLimit = Number(limit);
+    const topStayed = await retrieveTopStayed(parsedLimit);
+    res.status(200).json({
+      message: "Top visited retrieved",
+      success: true,
+      data: {
+        topStayed,
       },
     });
   } catch (err) {

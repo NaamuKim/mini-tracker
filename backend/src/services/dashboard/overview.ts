@@ -1,7 +1,13 @@
-import { findVisitors } from '@/models/dashboard/overview';
-import { VisitorsQueryParamsDTO } from '@/types/DTO/dashboard/overview';
+import { findTopStayed, findVisitors } from "@/models/dashboard/overview";
+import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
 
-export const retrieveVisitors = ({ startDate, endDate, interval, limit, sort }: VisitorsQueryParamsDTO) => {
+export const retrieveVisitors = ({
+  startDate,
+  endDate,
+  interval,
+  limit,
+  sort,
+}: VisitorsQueryParamsDTO) => {
   const retrievedVisitors = findVisitors({
     startDate,
     endDate,
@@ -10,4 +16,12 @@ export const retrieveVisitors = ({ startDate, endDate, interval, limit, sort }: 
     limit,
   });
   return retrievedVisitors;
+};
+
+export const retrieveTopStayed = async (limit: number) => {
+  const retrievedTopVisited = await findTopStayed(limit);
+  return retrievedTopVisited.map((topVisited) => ({
+    ...topVisited,
+    duration: Number(topVisited.duration),
+  }));
 };
