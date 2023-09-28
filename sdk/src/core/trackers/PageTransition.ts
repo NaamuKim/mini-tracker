@@ -16,6 +16,7 @@ class PageTransitionTracker {
   initialize() {
     this.addParseElementSelectorEvent();
     this.addSaveFromPageLocationEvent();
+    this.addSaveEventEmitTimeEvent();
   }
 
   private addParseElementSelectorEvent() {
@@ -42,6 +43,19 @@ class PageTransitionTracker {
     );
   }
 
+  private addSaveEventEmitTimeEvent() {
+    this.eventDispatcher.subscribe(
+      EVENT_KEYS.PAGE_TRANSITION_CLICK,
+      this.setEventEmitTime.bind(this),
+    );
+    this.eventDispatcher.attachEventToElement(
+      document,
+      "click",
+      EVENT_KEYS.PAGE_TRANSITION_CLICK,
+    );
+    // TODO: 주소 치고 이동하는 것에 대한 고려 필요
+  }
+
   private setFromPageLocation() {
     const url = new URL(window.location.href);
     this.storage.setItem(
@@ -55,6 +69,13 @@ class PageTransitionTracker {
     this.storage.setItem(
       STORAGE_KEYS.ELEMENT_SELECTOR,
       getQuerySelector(target),
+    );
+  }
+
+  private setEventEmitTime() {
+    this.storage.setItem(
+      STORAGE_KEYS.LAST_CLICK_EVENT_EMIT_TIME,
+      new Date().toISOString(),
     );
   }
 }
