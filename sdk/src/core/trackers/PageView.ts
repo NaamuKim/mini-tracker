@@ -49,12 +49,18 @@ class PageViewTracker {
     if (fromPageLocation && fromPageLocation !== pageViewData.pageLocation) {
       const pageTransitionData: PageTransition & {
         fromPageLocation: string;
+        fromPageExitTime: Date;
       } = {
         transitionTime: new Date(),
         elementSelector: this.storage.getItem(
           STORAGE_KEYS.ELEMENT_SELECTOR,
         ) as string,
         fromPageLocation,
+        fromPageExitTime: new Date(
+          this.storage.getItem(
+            STORAGE_KEYS.LAST_CLICK_EVENT_EMIT_TIME,
+          ) as string,
+        ),
       };
 
       return MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
