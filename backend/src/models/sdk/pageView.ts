@@ -33,3 +33,21 @@ export const findRecentPageViewBySession = async (
 
   return id;
 };
+
+export const insertPageExitTime = async ({
+  fromPageViewId,
+  exitTime,
+}: {
+  fromPageViewId: number;
+  exitTime: Date;
+}) => {
+  const hasExitTimePageView = prisma.pageView.update({
+    where: {
+      id: fromPageViewId,
+    },
+    data: {
+      exitTime,
+    },
+  });
+  return hasExitTimePageView;
+};

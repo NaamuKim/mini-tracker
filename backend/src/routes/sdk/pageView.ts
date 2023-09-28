@@ -34,11 +34,11 @@ router.post("/", async (req, res, next) => {
       transitionTime: req.body.transitionTime as Date,
       elementSelector: req.body.elementSelector as string,
     };
-
     const pageTransition = await registerPageTransition(
       sessionId,
       { ...req.body },
       pageTransitionInfo,
+      req.body?.fromPageExitTime as Date,
     );
 
     res.status(200).json({
