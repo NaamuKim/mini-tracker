@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { pipeMiddlewares } from "../fns/pipeMiddlewares";
-import { errorHandler } from "./errors/database";
+import { pipeMiddlewares } from "@/fns/pipeMiddlewares";
+import { errorHandler } from "@/middlewares/errors/database";
 
 export const setupMiddleware = (app: express.Application) => {
   pipeMiddlewares(
@@ -10,7 +10,7 @@ export const setupMiddleware = (app: express.Application) => {
     [
       express.json(),
       cors({
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000", "http://localhost:5000"],
         credentials: true,
       }),
       cookieParser(),
