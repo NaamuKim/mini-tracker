@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage } from "next";
-import LoginForm from "@/app/login/client/LoginForm";
+import LoginForm from "@/app/example/login/client/LoginForm";
 
 const Page: NextPage = () => {
   return (
