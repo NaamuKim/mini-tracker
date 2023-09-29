@@ -25,19 +25,21 @@ const DashboardBackground: React.FC<TProps> = ({
 const StyledWrapper = styled.section<{
   width: number | string;
 }>`
-  position: relative;
   width: ${({ width }) => width};
   height: fit-content;
   background-color: var(--upper-background-color);
   border-radius: 1vw;
   h3 {
-    position: absolute;
+    display: inline-block;
+    padding: 20px;
     margin: 0;
     top: 30px;
     left: 25px;
-    display: flex;
     font-size: 16px;
     font-weight: 500;
+  }
+  > div {
+    padding: 0 20px;
   }
 
   @keyframes fadein {
