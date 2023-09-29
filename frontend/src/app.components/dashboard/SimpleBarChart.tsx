@@ -20,7 +20,7 @@ const YAxisLeftTick = ({
   };
 }) => {
   return (
-    <Text y={y} fill="var(--text-color)">
+    <Text y={y + 5} fill="var(--text-color)">
       {value}
     </Text>
   );
@@ -67,7 +67,10 @@ const SimpleBarChart: React.FC<TProps> = ({ data, yKey, xKey }) => {
       <BarChart
         data={data}
         layout="vertical"
-        margin={{ left: 10, right: maxTextWidth + (BAR_AXIS_SPACE - 8) }}
+        margin={{
+          left: 10,
+          right: maxTextWidth + (BAR_AXIS_SPACE - 8),
+        }}
       >
         <XAxis hide axisLine={false} type="number" />
         <YAxis
@@ -89,7 +92,7 @@ const SimpleBarChart: React.FC<TProps> = ({ data, yKey, xKey }) => {
           tickFormatter={(value) => value.toLocaleString()}
           mirror
           tick={{
-            transform: `translate(${maxTextWidth + BAR_AXIS_SPACE}, 0)`,
+            transform: `translate(${maxTextWidth + BAR_AXIS_SPACE})`,
             fill: "var(--text-color)",
           }}
         />

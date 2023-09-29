@@ -4,3 +4,10 @@ export type TTopStayed = {
     duration: number;
   }>;
 };
+
+export type TTopVisited = {
+  topVisited: Array<{
+    pageLocation: string;
+    count: number;
+  }>;
+};
