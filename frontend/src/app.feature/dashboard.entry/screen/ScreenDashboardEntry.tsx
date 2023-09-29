@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import ChartsContainer from "@/app.feature/dashboard.entry/component/ChartsContainer";
 import TabBar from "@/app.components/TabBar";
+import Index from "@/app.components/MainTopNavigationBar";
 const ScreenDashboardEntry = () => {
   return (
     <StyledWrapper>
@@ -16,7 +17,6 @@ const ScreenDashboardEntry = () => {
 export default ScreenDashboardEntry;
 
 const StyledWrapper = styled.section`
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
   padding: 40px;
