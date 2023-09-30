@@ -41,7 +41,7 @@ const SankeyPageTransition = () => {
                   y={y}
                   width={width}
                   height={height}
-                  fill="var(--link-color)"
+                  fill="var(--primary-color)"
                   fillOpacity="1"
                 />
                 <text

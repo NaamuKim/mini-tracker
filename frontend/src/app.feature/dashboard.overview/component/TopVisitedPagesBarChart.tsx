@@ -1,5 +1,5 @@
 import React from "react";
-import SimpleBarChart from "@/app.components/dashboard/SimpleBarChart";
+import SimpleBarChart from "@/app.components/dashboard/chart/SimpleBarChart";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { API_TOP_VISITED } from "@/app.module/constant/api/app.dashboard/overview";

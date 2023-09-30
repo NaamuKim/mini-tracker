@@ -98,7 +98,7 @@ const SimpleBarChart: React.FC<TProps> = ({ data, yKey, xKey }) => {
         />
         <Bar dataKey={yKey} minPointSize={2} barSize={32}>
           {data.map((d, idx) => {
-            return <Cell key={d[xKey]} fill="var(--link-color)" />;
+            return <Cell key={d[xKey]} fill="var(--primary-color)" />;
           })}
         </Bar>
       </BarChart>

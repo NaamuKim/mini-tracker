@@ -54,7 +54,11 @@ const DailyViewLineChart = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="viewCount" stroke="var(--link-color)" />
+        <Line
+          type="monotone"
+          dataKey="viewCount"
+          stroke="var(--primary-color)"
+        />
       </LineChart>
     </ResponsiveContainer>
   );

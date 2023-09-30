@@ -38,7 +38,7 @@ const BarPageTransition = () => {
             color: "var(--text-secondary-color)",
           }}
         />
-        <Bar dataKey="value" fill="var(--link-color)" barSize={30} />
+        <Bar dataKey="value" fill="var(--primary-color)" barSize={30} />
       </BarChart>
     </DashboardBackground>
   );
