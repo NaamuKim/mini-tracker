@@ -31,7 +31,6 @@ const StyledWrapper = styled.div`
   }
   > div {
     display: flex;
-    gap: 30px;
   }
   .quad-section {
     display: grid;

@@ -49,15 +49,17 @@ export default MenuLinkTabBar;
 const StyledWrapper = styled.section`
   display: flex;
   gap: 15px;
+
   h2 {
     cursor: pointer;
     word-spacing: -2px;
     font-size: 16px;
     font-weight: 400;
     color: var(--text-color);
+
     &.active {
       font-weight: 600;
-      color: var(--link-color);
+      color: var(--primary-color);
     }
   }
 `;

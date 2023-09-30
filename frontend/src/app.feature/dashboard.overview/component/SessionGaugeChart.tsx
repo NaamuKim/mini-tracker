@@ -11,40 +11,13 @@ import DashboardBackground from "@/app.components/dashboard/DashboardBackground"
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { API_TOP_STAYED } from "@/app.module/constant/api/app.dashboard/overview";
 import { TTopStayed } from "@/app.feature/dashboard.overview/module/type/APIResponseType";
+import PieChartRenderLabel from "@/app.components/dashboard/chart/PieChartRenderLabel";
 
 const COLORS = [
   "var(--sub-color)",
   "var(--text-secondary-color)",
-  "var(--link-color)",
+  "var(--primary-color)",
 ];
-
-const renderLabel = ({
-  cx = 0,
-  cy = 0,
-  midAngle = 0,
-  innerRadius = 0,
-  outerRadius = 0,
-  percent = 0,
-}: PieLabelRenderProps) => {
-  const RADIAN = Math.PI / 180;
-  const radius =
-    Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5; // 레이블이 위치할 반경 설정
-  const x = Number(cx) + radius * Math.cos(-midAngle * RADIAN);
-  const y = Number(cy) + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="var(--text-color)"
-      fontWeight={700}
-      textAnchor={x > Number(cx) ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
 
 const SessionGaugeChart = () => {
   const { data: mostStayedPages } = useQueryFn<
@@ -77,7 +50,7 @@ const SessionGaugeChart = () => {
             cy="70%"
             data={mostStayedPages}
             labelLine={false}
-            label={renderLabel}
+            label={PieChartRenderLabel()}
           >
             {mostStayedPages?.map((entry, index) => (
               <Cell

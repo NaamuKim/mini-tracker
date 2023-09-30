@@ -3,6 +3,7 @@ import DailyViewLineChart from "@/app.feature/dashboard.overview/component/Daily
 import SessionGaugeChart from "@/app.feature/dashboard.overview/component/SessionGaugeChart";
 import styled from "styled-components";
 import TopVisitedPagesBarChart from "@/app.feature/dashboard.overview/component/TopVisitedPagesBarChart";
+import ReferrerSourcesPieChart from "@/app.feature/dashboard.overview/component/ReferrerSourcesPieChart";
 
 const ScreenOverViewDashboard = () => {
   return (
@@ -12,6 +13,10 @@ const ScreenOverViewDashboard = () => {
         <SessionGaugeChart />
       </div>
       <TopVisitedPagesBarChart />
+      <div id="bottom-chart-section">
+        <ReferrerSourcesPieChart />
+        <div>Page Transitions</div>
+      </div>
     </StyledWrapper>
   );
 };
@@ -19,9 +24,16 @@ const ScreenOverViewDashboard = () => {
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
   #top-chart-section {
     display: flex;
+  }
+  #bottom-chart-section {
+    display: flex;
+    gap: 10px;
+    > div {
+      flex: 1;
+    }
   }
 `;
 
