@@ -1,0 +1,41 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: naamukim/mini-tracker
+          stage: main
+          yaml: >
+            name: mini-tracker
+
+            app: node@20
+
+            options:
+              env:
+                - name: NODE_ENV
+                  value: production
+                - name: DATABASE_URL
+                  value: ${{ secrets.DATABASE_URL }}
+              ports: "8080"
+              install: npm i
+              build: npx prisma generate && npm run build
+              start: npm run start
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
