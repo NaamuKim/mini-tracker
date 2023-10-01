@@ -15,3 +15,8 @@ export const API_TOP_STAYED = "/overview/top-stayed";
  */
 
 export const API_TOP_VISITED = "/overview/top-visited";
+
+/**
+ * referrers data.
+ */
+export const API_REFERRERS = "/overview/referrers";

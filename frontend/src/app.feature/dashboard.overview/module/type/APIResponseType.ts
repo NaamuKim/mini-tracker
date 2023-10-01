@@ -11,3 +11,11 @@ export type TTopVisited = {
     count: number;
   }>;
 };
+
+export type TReferrers = {
+  referrers: Array<{
+    referrer: string;
+    count: number;
+    percent: string;
+  }>;
+};
