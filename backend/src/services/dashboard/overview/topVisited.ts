@@ -1,4 +1,4 @@
-import { findTopVisited } from "@/models/dashboard/overview";
+import { findTopVisited } from "@/models/dashboard/overview/topVisited";
 
 export const retrieveTopVisited = async (limit: number) => {
   const retrievedTopVisited = await findTopVisited(limit);
