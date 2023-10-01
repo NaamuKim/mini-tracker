@@ -5,4 +5,5 @@ export const REGEX = {
     /\.(com|net|org|io|gov|edu|mil|int|eu|asia|cat|coop|aero|arpa|biz|info|mobi|name|post|pro|tel|travel|jobs|museum|xxx)[\/]?$/gi,
   SIMPLIFY_URL:
     /^((http(s)?:\/\/)?(www\.)?)|(\.(com|net|org|io|gov|edu|mil|int|eu|asia|cat|coop|aero|arpa|biz|info|mobi|name|post|pro|tel|travel|jobs|museum|xxx)[\/]?)/gi,
+  SLICE_FIRST_SLASH: /^\//,
 };

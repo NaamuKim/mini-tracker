@@ -20,3 +20,9 @@ export const API_TOP_VISITED = "/overview/top-visited";
  * referrers data.
  */
 export const API_REFERRERS = "/overview/referrers";
+
+/**
+ * top page transitions data.
+ */
+
+export const API_TOP_PAGE_TRANSITIONS = "/overview/top-page-transitions";
