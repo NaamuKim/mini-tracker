@@ -2,33 +2,10 @@ import React from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 import PieChartRenderLabel from "@/app.components/dashboard/chart/PieChartRenderLabel";
-
-const data = [
-  {
-    name: "Group A",
-    value: 400,
-  },
-  {
-    name: "Group B",
-    value: 300,
-  },
-  {
-    name: "Group C",
-    value: 300,
-  },
-  {
-    name: "Group D",
-    value: 200,
-  },
-  {
-    name: "Group E",
-    value: 278,
-  },
-  {
-    name: "Group F",
-    value: 189,
-  },
-];
+import useQueryFn from "@/app.module/react-query/useQueryFn";
+import { TReferrers } from "@/app.feature/dashboard.overview/module/type/APIResponseType";
+import { API_REFERRERS } from "@/app.module/constant/api/app.dashboard/overview";
+import { formatReferrer } from "@/app.feature/dashboard.overview/module/util/format";
 
 const COLORS = [
   "var(--primary-color)",
@@ -38,6 +15,19 @@ const COLORS = [
 ] as const;
 
 const ReferrerSourcesPieChart = () => {
+  const { data: referrersData } = useQueryFn<
+    TReferrers,
+    TReferrers["referrers"]
+  >([API_REFERRERS], {
+    select: (data) =>
+      data.referrers.map((item) => ({
+        ...item,
+        name: formatReferrer(item.referrer),
+      })),
+  });
+
+  if (!referrersData) return null;
+
   return (
     <div>
       <DashboardBackground title="Referrer Sources">
@@ -46,14 +36,14 @@ const ReferrerSourcesPieChart = () => {
             <Pie
               labelLine={false}
               label={PieChartRenderLabel("name")}
-              dataKey="value"
+              dataKey="count"
               nameKey="name"
               outerRadius="80%"
               cx="50%"
               cy="50%"
-              data={data}
+              data={referrersData}
             >
-              {data.map((entry, index) => (
+              {referrersData.map((entry, index) => (
                 <Cell
                   key={`referrer-pie-char-cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
