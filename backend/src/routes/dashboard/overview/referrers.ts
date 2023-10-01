@@ -1,26 +1,16 @@
 import express from "express";
+import { retrieveReferrers } from "@/services/dashboard/overview/referrers";
 
 const router = express.Router();
-router.get("/referrers", (req, res) => {
+router.get("/referrers", async (req, res) => {
   try {
+    const referrers = await retrieveReferrers();
+
     res.status(200).json({
       message: "Referrers retrieved",
       success: true,
       data: {
-        referrers: [
-          {
-            name: "Google",
-            count: 100,
-          },
-          {
-            name: "Facebook",
-            count: 50,
-          },
-          {
-            name: "Twitter",
-            count: 20,
-          },
-        ],
+        referrers,
       },
     });
   } catch (err) {
