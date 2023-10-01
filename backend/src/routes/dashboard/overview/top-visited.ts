@@ -1,5 +1,5 @@
 import express from "express";
-import { retrieveTopVisited } from "@/services/dashboard/overview";
+import { retrieveTopVisited } from "@/services/dashboard/overview/topVisited";
 
 const router = express.Router();
 router.get("/top-visited", async (req, res) => {
