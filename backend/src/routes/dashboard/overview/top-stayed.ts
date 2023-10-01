@@ -1,5 +1,5 @@
 import express from "express";
-import { retrieveTopStayed } from "@/services/dashboard/overview";
+import { retrieveTopStayed } from "@/services/dashboard/overview/topStayed";
 
 const router = express.Router();
 router.get("/top-stayed", async (req, res) => {

@@ -1,7 +1,7 @@
 import express from "express";
 import { validateVisitorsQueryParam } from "@/middlewares/validators/dashboard/overview";
 import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
-import { retrieveVisitors } from "@/services/dashboard/overview";
+import { retrieveVisitors } from "@/services/dashboard/overview/visitors";
 
 const router = express.Router();
 router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
