@@ -10,7 +10,7 @@ export const setupMiddleware = (app: express.Application) => {
     [
       express.json(),
       cors({
-        origin: ["http://localhost:3000", "http://localhost:5000"],
+        origin: JSON.parse(process.env.CORS_WHITE_LIST as string),
         credentials: true,
       }),
       cookieParser(),
