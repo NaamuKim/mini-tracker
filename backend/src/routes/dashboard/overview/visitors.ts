@@ -1,14 +1,9 @@
 import express from "express";
-import {
-  retrieveTopStayed,
-  retrieveTopVisited,
-  retrieveVisitors,
-} from "@/services/dashboard/overview";
-import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
 import { validateVisitorsQueryParam } from "@/middlewares/validators/dashboard/overview";
+import { VisitorsQueryParamsDTO } from "@/types/DTO/dashboard/overview";
+import { retrieveVisitors } from "@/services/dashboard/overview";
 
 const router = express.Router();
-
 router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
   const {
     startDate,
@@ -58,43 +53,4 @@ router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
   }
 });
 
-router.get("/top-stayed", async (req, res) => {
-  try {
-    const { limit = 5 } = req.query;
-    const parsedLimit = Number(limit);
-    const topStayed = await retrieveTopStayed(parsedLimit);
-    res.status(200).json({
-      message: "Top visited retrieved",
-      success: true,
-      data: {
-        topStayed,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: (err as Error)?.message || "Internal server error",
-    });
-  }
-});
-
-router.get("/top-visited", async (req, res) => {
-  try {
-    const { limit = 5 } = req.query;
-    const topVisitedData = await retrieveTopVisited(Number(limit));
-
-    return res.status(200).json({
-      message: "Top visited retrieved",
-      success: true,
-      data: {
-        topVisited: topVisitedData,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({
-      message: (err as Error)?.message || "Internal server error",
-    });
-  }
-});
 export default router;
