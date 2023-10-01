@@ -17,6 +17,5 @@ export const findReferrers = async () => {
       },
     },
   });
-  console.log(result);
   return result;
 };
