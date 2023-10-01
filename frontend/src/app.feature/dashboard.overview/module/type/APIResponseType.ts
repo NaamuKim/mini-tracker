@@ -19,3 +19,11 @@ export type TReferrers = {
     percent: string;
   }>;
 };
+
+export type TTopPageTransitions = {
+  topPageTransitions: Array<{
+    from: string;
+    to: string;
+    count: number;
+  }>;
+};

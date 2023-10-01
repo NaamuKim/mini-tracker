@@ -1,9 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import DailyViewLineChart from "@/app.feature/dashboard.overview/component/DailyViewLineChart";
 import SessionGaugeChart from "@/app.feature/dashboard.overview/component/SessionGaugeChart";
-import styled from "styled-components";
 import TopVisitedPagesBarChart from "@/app.feature/dashboard.overview/component/TopVisitedPagesBarChart";
 import ReferrerSourcesPieChart from "@/app.feature/dashboard.overview/component/ReferrerSourcesPieChart";
+import PageTransitionBarChart from "@/app.feature/dashboard.overview/component/PageTransitionBarChart";
 
 const ScreenOverViewDashboard = () => {
   return (
@@ -15,7 +16,7 @@ const ScreenOverViewDashboard = () => {
       <TopVisitedPagesBarChart />
       <div id="bottom-chart-section">
         <ReferrerSourcesPieChart />
-        <div>Page Transitions</div>
+        <PageTransitionBarChart />
       </div>
     </StyledWrapper>
   );
