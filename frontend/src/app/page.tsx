@@ -1,15 +1,12 @@
-import Link from "next/link";
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main>
-      <div>Landing Page</div>
-      <Link href="/example/1">
-        <h2>Go to tracked page</h2>
-      </Link>
-      <Link href="/dashboard">
-        <h2>Go to Dashboard page</h2>
-      </Link>
-    </main>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/dashboard");
+  }, [router]);
+
+  return null;
 }

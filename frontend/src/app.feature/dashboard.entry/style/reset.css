@@ -11,18 +11,24 @@
     --section-green: #53A653;
 }
 
+
 /* Reset CSS */
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 html, body {
-    margin: 0;
-    padding: 0;
     height: 100%;
     font-family: 'Arial', sans-serif;
     color: var(--text-color);
     background: var(--background-color);
+}
+
+a {
+    text-decoration: none;
 }
 
 
@@ -43,4 +49,4 @@ button:hover {
     background-color: var(--button-hover-color);
 }
 
-/* Add other styles as needed */
+

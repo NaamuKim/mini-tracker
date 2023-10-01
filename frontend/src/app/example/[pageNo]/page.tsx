@@ -5,11 +5,13 @@ import Link from "next/link";
 import styles from "./pageNo.module.css";
 import { usePathname } from "next/navigation";
 import { getPages } from "@/app.module/pages";
+import MainTopNavigationBar from "@/app.components/MainTopNavigationBar";
 const ExamplePageNo: NextPage = () => {
   const pathname = usePathname();
 
   return (
     <>
+      <MainTopNavigationBar />
       <h2 className={styles.header}>
         here is page {pathname.split("/").pop()} <br />
       </h2>

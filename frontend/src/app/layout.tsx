@@ -1,5 +1,6 @@
-import "./globals.css";
 import StyledComponentsRegistry from "@/app.styled/styled-component";
+import QueryProvider from "@/app.module/react-query/QueryProvider";
+import "@/app.feature/dashboard.entry/style/reset.css";
 
 export default function RootLayout({
   children,
@@ -13,7 +14,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body suppressHydrationWarning={true}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <QueryProvider>{children}</QueryProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
