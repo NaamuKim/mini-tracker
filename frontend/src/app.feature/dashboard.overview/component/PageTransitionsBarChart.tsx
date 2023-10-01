@@ -3,53 +3,38 @@ import { Bar, BarChart, Cell, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 import { TTopPageTransitions } from "@/app.feature/dashboard.overview/module/type/APIResponseType";
+import useQueryFn from "@/app.module/react-query/useQueryFn";
+import { API_TOP_PAGE_TRANSITIONS } from "@/app.module/constant/api/app.dashboard/overview";
+import { REGEX } from "@/app.module/utils/REGEX";
 
-const data = [
-  {
-    from: "naamukim",
-    to: "nanana",
-    count: 400,
-  },
-  {
-    from: "nanana",
-    to: "jiji",
-    count: 300,
-  },
-  {
-    from: "jiji",
-    to: "lala",
-    count: 200,
-  },
-  {
-    from: "lala",
-    to: "papa",
-    count: 100,
-  },
-  {
-    from: "papa",
-    to: "naamukim",
-    count: 50,
-  },
-];
+const PageTransitionsBarChart = () => {
+  const { data: topPageTransitions } = useQueryFn<
+    TTopPageTransitions,
+    TTopPageTransitions["topPageTransitions"]
+  >([API_TOP_PAGE_TRANSITIONS], {
+    select: (data) =>
+      data.topPageTransitions.map((item) => ({
+        ...item,
+        from: item.from.replace(REGEX.SLICE_FIRST_SLASH, ""),
+        to: item.to.replace(REGEX.SLICE_FIRST_SLASH, ""),
+      })),
+  });
 
-const PageTransitionBarChart = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (data: TTopPageTransitions, index: number) => {
     setActiveIndex(index);
   };
 
+  if (!topPageTransitions) return null;
+
   return (
     <StyledWrapper>
       <DashboardBackground title="Top Page Transitions">
         <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <Bar
-              dataKey="count"
-              label={({ count }) => <div>{count}</div>}
-              onClick={handleClick}
-            >
-              {data.map((entry, index) => (
+          <BarChart data={topPageTransitions}>
+            <Bar dataKey="count" onClick={handleClick}>
+              {topPageTransitions?.map((entry, index) => (
                 <Cell
                   cursor="pointer"
                   fill={
@@ -64,16 +49,23 @@ const PageTransitionBarChart = () => {
           </BarChart>
         </ResponsiveContainer>
         <p className="description">
-          From: <span className="span-from">{data[activeIndex].from}</span>
-          To: <span className="span-to">{data[activeIndex].to}</span>
-          Total: <span className="span-value">{data[activeIndex].count}</span>
+          From:{" "}
+          <span className="span-from">
+            {topPageTransitions[activeIndex].from}
+          </span>
+          To:{" "}
+          <span className="span-to">{topPageTransitions[activeIndex].to}</span>
+          Total:{" "}
+          <span className="span-value">
+            {topPageTransitions[activeIndex].count}
+          </span>
         </p>
       </DashboardBackground>
     </StyledWrapper>
   );
 };
 
-export default PageTransitionBarChart;
+export default PageTransitionsBarChart;
 
 const StyledWrapper = styled.div`
   width: 50%;
