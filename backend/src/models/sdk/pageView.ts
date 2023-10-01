@@ -34,13 +34,33 @@ export const findRecentPageViewBySession = async (
   return id;
 };
 
-export const insertPageExitTime = async ({
+export const findRecentReferrerBySessionId = async (
+  sessionId: string,
+): Promise<string | null> => {
+  const { referrer } = (await prisma.pageView.findFirst({
+    where: {
+      sessionId,
+      referrer: {
+        not: null,
+      },
+    },
+    orderBy: {
+      entryTime: "desc",
+    },
+  })) || { referrer: null };
+
+  return referrer;
+};
+
+export const updateFromPageExitTime = async ({
   fromPageViewId,
   exitTime,
 }: {
   fromPageViewId: number;
-  exitTime: Date;
+  exitTime?: Date;
 }) => {
+  if (!exitTime) return;
+
   const hasExitTimePageView = prisma.pageView.update({
     where: {
       id: fromPageViewId,
