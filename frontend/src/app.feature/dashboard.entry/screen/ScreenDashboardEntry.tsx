@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import ChartsContainer from "@/app.feature/dashboard.entry/component/ChartsContainer";
 import TabBar from "@/app.components/TabBar";
-import Index from "@/app.components/MainTopNavigationBar";
+import MainTopNavigationBar from "@/app.components/MainTopNavigationBar";
 const ScreenDashboardEntry = () => {
   return (
     <StyledWrapper>
@@ -22,5 +22,6 @@ const StyledWrapper = styled.section`
   padding: 40px;
   h2 {
     font-size: 24px;
+    margin-bottom: 20px;
   }
 `;

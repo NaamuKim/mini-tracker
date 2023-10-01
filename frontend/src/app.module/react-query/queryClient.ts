@@ -1,6 +1,6 @@
-import { ApiError } from "@/app.module/class/ApiError";
 import { QueryClient } from "react-query";
-
+import { cache } from "react";
+import { ApiError } from "@/app.module/class/ApiError";
 const queryErrorHandler = (error: unknown): void => {
   const title =
     error instanceof Error ? error.message : "error connecting to server";
