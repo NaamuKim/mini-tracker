@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = process.env.API_URI;
 
 /*
  * API for sending page view info to servers

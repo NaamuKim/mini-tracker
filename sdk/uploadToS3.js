@@ -1,9 +1,6 @@
 const AWS = require("aws-sdk");
 const fs = require("fs");
 const path = require("path");
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 // AWS S3 객체를 생성합니다.
 const s3 = new AWS.S3({
