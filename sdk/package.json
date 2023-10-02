@@ -8,7 +8,7 @@
     "build:local": "env-cmd -f .env/.env.local npm run build",
     "deploy": "env-cmd -f .env/.env.production npm run build && env-cmd -f .env/.env.production node uploadToS3.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node localServer/app.js"
+    "dev": "env-cmd -f .env/.env.local node localServer/app.js"
   },
   "keywords": [],
   "author": "naamukim",

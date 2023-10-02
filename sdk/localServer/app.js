@@ -4,6 +4,7 @@ const WebSocket = require("ws");
 const path = require("path");
 const esbuild = require("esbuild");
 const child_process = require("child_process");
+const process = require("process");
 
 const app = express();
 const PORT = 3000;
@@ -25,7 +26,13 @@ const watcher = chokidar.watch(watchSdkDir, {
     bundle: true,
     outfile: path.join(process.cwd(), "dist/mini-tracker-sdk.js"),
     entryPoints: [path.join(process.cwd(), "src/index.ts")],
+    define: {
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.API_URI": JSON.stringify(process.env.API_URI),
+    },
+    sourcemap: true,
   });
+  await SDKBuilder.rebuild();
 
   watcher.on("change", async (filePath) => {
     console.log(`SDK File changed: ${filePath}`);
