@@ -22,7 +22,11 @@ router.post("/", async (req, res, next) => {
         reqBody: req.body,
         baseUrl,
       });
-      res.cookie(SESSION_COOKIE_KEY, sessionId);
+      res.cookie(SESSION_COOKIE_KEY, sessionId, {
+        maxAge: 1000 * 60 * 60 * 24,
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+      });
     }
     const { fromPageLocation } = req.body;
 

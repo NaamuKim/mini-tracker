@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "node build.js",
-    "start": "node dist/index.js",
-    "dev": "nodemon --watch src --ext ts --exec 'node build.js && node dist/index.js'",
+    "build": "NODE_ENV=production node build.js",
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=development nodemon --watch src --ext ts --exec 'node build.js && node dist/index.js'",
     "test": "jest --watch --coverage"
   },
   "module": "esm",
@@ -25,7 +25,7 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.4",
-    "@types/node": "^20.4.2",
+    "@types/node": "^20.8.0",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
