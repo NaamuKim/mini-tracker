@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - backend/**
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,6 +16,8 @@ jobs:
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Change directory to 'backend'
+        run: cd backend
       - name: Deploy
         uses: cloudtype-github-actions/deploy@v1
         with:
