@@ -13,4 +13,5 @@ require("esbuild")
       }),
     ],
   })
+  .then(() => console.log("⚡ Bundle build complete ⚡"))
   .catch(() => process.exit(1));
