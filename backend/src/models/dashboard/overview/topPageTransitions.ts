@@ -1,6 +1,12 @@
 import prisma from "@/config/db";
 
-export const findTopPageTransitions = async () => {
+export const findTopPageTransitions = async ({
+  limit,
+  queriedUrl,
+}: {
+  limit: number;
+  queriedUrl: string;
+}) => {
   const result = await prisma.$queryRaw<
     Array<{
       fromPageLocation: string;
@@ -25,7 +31,9 @@ export const findTopPageTransitions = async () => {
               PageView AS pv2
               ON
                   pt.toPageViewId = pv2.id
-          WHERE pv1.pageLocation <> pv2.pageLocation
+          WHERE pv1.pageLocation <> pv2.pageLocation 
+            AND pv1.baseUrl = ${queriedUrl}
+            AND pv2.baseUrl = ${queriedUrl}
       )
       SELECT
           jp.fromPageLocation,
@@ -39,7 +47,7 @@ export const findTopPageTransitions = async () => {
       ORDER BY
           count DESC
       LIMIT
-          5;
+          ${limit}
 
   `;
   return result;

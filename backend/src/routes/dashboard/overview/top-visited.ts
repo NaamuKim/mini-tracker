@@ -4,8 +4,12 @@ import { retrieveTopVisited } from "@/services/dashboard/overview/topVisited";
 const router = express.Router();
 router.get("/top-visited", async (req, res) => {
   try {
-    const { limit = 5 } = req.query;
-    const topVisitedData = await retrieveTopVisited(Number(limit));
+    const { limit = 5, queriedUrl } = req.query;
+
+    const topVisitedData = await retrieveTopVisited({
+      limit: Number(limit),
+      queriedUrl: queriedUrl as string,
+    });
 
     return res.status(200).json({
       message: "Top visited retrieved",

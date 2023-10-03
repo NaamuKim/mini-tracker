@@ -36,7 +36,7 @@ const PageTransitionsBarChart = () => {
     setActiveIndex(index);
   };
 
-  if (!topPageTransitions) return null;
+  if (!topPageTransitions?.length) return null;
 
   return (
     <StyledWrapper>
@@ -61,13 +61,13 @@ const PageTransitionsBarChart = () => {
         <p className="description">
           From:{" "}
           <span className="span-from">
-            {topPageTransitions[activeIndex].from}
+            {topPageTransitions[activeIndex]?.from}
           </span>
           To:{" "}
-          <span className="span-to">{topPageTransitions[activeIndex].to}</span>
+          <span className="span-to">{topPageTransitions[activeIndex]?.to}</span>
           Total:{" "}
           <span className="span-value">
-            {topPageTransitions[activeIndex].count}
+            {topPageTransitions[activeIndex]?.count}
           </span>
         </p>
       </DashboardBackground>

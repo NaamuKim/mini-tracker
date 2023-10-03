@@ -1,7 +1,11 @@
 import { findReferrers } from "@/models/dashboard/overview/referrers";
 
-export const retrieveReferrers = async () => {
-  const referrers = await findReferrers();
+export const retrieveReferrers = async ({
+  queriedUrl,
+}: {
+  queriedUrl: string;
+}) => {
+  const referrers = await findReferrers({ queriedUrl });
   return getReferrersWithPercent(getFlatReferrers(referrers));
 };
 

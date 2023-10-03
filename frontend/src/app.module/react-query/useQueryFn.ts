@@ -49,8 +49,7 @@ export const useQueryFn = <ResponseData, SelectedData = ResponseData>(
           queryKeys[0] +
           objectToQueryParamString({
             ...queryKeys[1],
-            queriedUrl:
-              queryKeys[1]?.queriedUrl ?? ENV_CONSTANTS.APP_EXAMPLE_PAGE_URL,
+            queriedUrl: queryKeys[1]?.queriedUrl ?? ENV_CONSTANTS.APP_URL,
           }),
         method: "GET",
       });

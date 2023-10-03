@@ -6,4 +6,5 @@ export type VisitorsQueryParamsDTO = {
   interval: Interval;
   sort: Sort;
   limit: number;
+  queriedUrl: string;
 };
