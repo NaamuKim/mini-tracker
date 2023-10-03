@@ -1,4 +1,6 @@
-export const BASE_URL = process.env["NEXT_PUBLIC_API_DASHBOARD_URL"];
+import { ENV_CONSTANTS } from "@/app.module/constant/env";
+
+export const BASE_URL = ENV_CONSTANTS.API_DASHBOARD_URL;
 
 export const fetcher = <T>({
   url,
