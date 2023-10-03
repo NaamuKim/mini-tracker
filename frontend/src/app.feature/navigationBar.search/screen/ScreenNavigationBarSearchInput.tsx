@@ -14,7 +14,7 @@ const ScreenNavigationBarSearchInput = () => {
     TSearchApps,
     TSearchApps["apps"]
   >([API_SEARCH_APP, { word: fetchingWord }], {
-    select: (data) => data.apps,
+    select: ({ apps }) => apps,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +37,7 @@ const ScreenNavigationBarSearchInput = () => {
               <Link
                 href={{
                   query: {
-                    baseUrl,
+                    queriedUrl: baseUrl,
                   },
                 }}
               >

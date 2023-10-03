@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { ENV_CONSTANTS } from "@/app.module/constant/env";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
   return (
     <>
       {children}
-      <Script src={process.env.NEXT_PUBLIC_SDK_URL} />
+      <Script src={ENV_CONSTANTS.APP_SDK_URL} />
     </>
   );
 }
