@@ -4,22 +4,32 @@ import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { BestPageTransition } from "@/app.feature/dashboard.entry/types/pageTransition";
 import { API_BEST_BARS_TRANSITION } from "@/app.module/constant/api/app.dashboard/transition";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
+import { useParams } from "next/navigation";
 
 const BarPageTransition = () => {
+  const { queriedUrl } = useParams();
   const { data } = useQueryFn<
     BestPageTransition[],
     { name: string; value: number }[]
-  >([API_BEST_BARS_TRANSITION], {
-    select: (data) => {
-      return data.map((item: BestPageTransition) => ({
-        name:
-          item.previous_page.split("/").pop() +
-          " -> " +
-          item.current_page.split("/").pop(),
-        value: item.transition_count,
-      }));
+  >(
+    [
+      API_BEST_BARS_TRANSITION,
+      {
+        queriedUrl,
+      },
+    ],
+    {
+      select: (data) => {
+        return data.map((item: BestPageTransition) => ({
+          name:
+            item.previous_page.split("/").pop() +
+            " -> " +
+            item.current_page.split("/").pop(),
+          value: item.transition_count,
+        }));
+      },
     },
-  });
+  );
 
   if (!data) return null;
 

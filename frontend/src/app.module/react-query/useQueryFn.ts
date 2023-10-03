@@ -1,6 +1,7 @@
 import { useQuery, UseQueryOptions } from "react-query";
 import { useParams } from "next/navigation";
 import { fetcher } from "@/app.module/fetcher";
+import { ENV_CONSTANTS } from "@/app.module/constant/env";
 
 const objectToQueryParamString = (
   obj?: Record<string, string | number | boolean>,
@@ -40,22 +41,20 @@ export const useQueryFn = <ResponseData, SelectedData = ResponseData>(
     customQueryKeys?: any;
   } = {},
 ) => {
-  const queriedUrl =
-    (useParams().queriedUrl as string | undefined) ||
-    (process.env.NEXT_PUBLIC_APP_URL as string);
-
   return useQuery<ResponseData, unknown, SelectedData>(
     queryKeys,
-    async () =>
-      await requestFn({
+    async () => {
+      return await requestFn({
         url:
           queryKeys[0] +
           objectToQueryParamString({
-            queriedUrl,
             ...queryKeys[1],
+            queriedUrl:
+              queryKeys[1]?.queriedUrl ?? ENV_CONSTANTS.APP_EXAMPLE_PAGE_URL,
           }),
         method: "GET",
-      }),
+      });
+    },
     {
       ...options,
     },

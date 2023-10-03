@@ -18,8 +18,10 @@ import {
   getSevenDaysAgo,
 } from "@/app.module/utils/date";
 import { API_DAILY_VIEW } from "@/app.module/constant/api/app.dashboard/overview";
+import { useParams, useSearchParams } from "next/navigation";
 
 const DailyViewLineChart = () => {
+  const queriedUrl = useSearchParams().get("queriedUrl");
   const { data: dailyViewData } = useQueryFn<
     { visitors: Array<{ date: Date; count: number }> },
     Array<{
@@ -30,6 +32,7 @@ const DailyViewLineChart = () => {
     [
       API_DAILY_VIEW,
       {
+        queriedUrl,
         startDate: formatYYYYMMDD(getSevenDaysAgo(new Date())),
         endDate: formatYYYYMMDD(getNextDay(new Date())),
       },

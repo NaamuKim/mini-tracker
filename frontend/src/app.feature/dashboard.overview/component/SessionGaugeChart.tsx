@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Cell,
-  Tooltip,
-  PieLabelRenderProps,
-} from "recharts";
+import { Pie, PieChart, ResponsiveContainer, Cell, Tooltip } from "recharts";
 import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { API_TOP_STAYED } from "@/app.module/constant/api/app.dashboard/overview";
 import { TTopStayed } from "@/app.feature/dashboard.overview/module/type/APIResponseType";
 import PieChartRenderLabel from "@/app.components/dashboard/chart/PieChartRenderLabel";
+import { useSearchParams } from "next/navigation";
 
 const COLORS = [
   "var(--sub-color)",
@@ -20,21 +14,30 @@ const COLORS = [
 ];
 
 const SessionGaugeChart = () => {
+  const queriedUrl = useSearchParams().get("queriedUrl");
   const { data: mostStayedPages } = useQueryFn<
     TTopStayed,
     Array<{
       name: string;
       value: number;
     }>
-  >([API_TOP_STAYED], {
-    select: (data) =>
-      data.topStayed.map((item) => ({
-        name: item.pageLocation.startsWith("/")
-          ? item.pageLocation.slice(1)
-          : item.pageLocation,
-        value: item.duration,
-      })),
-  });
+  >(
+    [
+      API_TOP_STAYED,
+      {
+        queriedUrl,
+      },
+    ],
+    {
+      select: (data) =>
+        data.topStayed.map((item) => ({
+          name: item.pageLocation.startsWith("/")
+            ? item.pageLocation.slice(1)
+            : item.pageLocation,
+          value: item.duration,
+        })),
+    },
+  );
 
   return (
     <DashboardBackground width="30%" title="Long Stayed Pages">

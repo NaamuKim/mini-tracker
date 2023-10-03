@@ -14,11 +14,6 @@ const TabNames = [
     href: "/dashboard?tab=page-transition",
     param: "page-transition",
   },
-  {
-    name: "Click",
-    href: "/dashboard?tab=click",
-    param: "click",
-  },
 ] as const;
 
 type Tab = (typeof TabNames)[number];
@@ -37,7 +32,7 @@ const TabBar = () => {
   const handleClickLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const href = e.currentTarget.getAttribute("href");
-    if (href === TabNames[1].href || href === TabNames[2].href) {
+    if (href !== TabNames[0].href) {
       alert("This feature is still in development");
       return;
     }
@@ -69,9 +64,7 @@ export default TabBar;
 
 const StyledWrapper = styled.nav`
   display: flex;
-  justify-content: space-between;
-  width: 300px;
-
+  gap: 20px;
   font-size: 18px;
   > a {
     height: 30px;
