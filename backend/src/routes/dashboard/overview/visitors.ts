@@ -11,6 +11,7 @@ router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
     interval = "day",
     sort = "asc",
     limit = 50,
+    queriedUrl,
   } = req.validatedQueryParams as VisitorsQueryParamsDTO;
 
   try {
@@ -34,6 +35,7 @@ router.get("/visitors", validateVisitorsQueryParam, async (req, res) => {
       interval,
       sort,
       limit: Number(limit),
+      queriedUrl,
     };
 
     const visitors = await retrieveVisitors(validatedVisitors);

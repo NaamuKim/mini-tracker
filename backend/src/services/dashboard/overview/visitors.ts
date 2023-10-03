@@ -7,6 +7,7 @@ export const retrieveVisitors = ({
   interval,
   limit,
   sort,
+  queriedUrl,
 }: VisitorsQueryParamsDTO) => {
   const retrievedVisitors = findVisitors({
     startDate,
@@ -14,6 +15,7 @@ export const retrieveVisitors = ({
     sort,
     interval,
     limit,
+    queriedUrl,
   });
   return retrievedVisitors;
 };

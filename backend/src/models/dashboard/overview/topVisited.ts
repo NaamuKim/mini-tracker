@@ -1,6 +1,12 @@
 import prisma from "@/config/db";
 
-export const findTopVisited = async (limit: number) => {
+export const findTopVisited = async ({
+  limit,
+  queriedUrl,
+}: {
+  limit: number;
+  queriedUrl: string;
+}) => {
   const result = await prisma.pageView.groupBy({
     by: ["pageLocation"],
     _count: {
@@ -10,6 +16,9 @@ export const findTopVisited = async (limit: number) => {
       _count: {
         pageLocation: "desc",
       },
+    },
+    where: {
+      baseUrl: queriedUrl,
     },
     take: limit,
   });

@@ -1,6 +1,6 @@
 import prisma from "@/config/db";
 
-export const findReferrers = async () => {
+export const findReferrers = async ({ queriedUrl }: { queriedUrl: string }) => {
   const result = await prisma.pageView.groupBy({
     by: ["referrer"],
     _count: {
@@ -15,6 +15,7 @@ export const findReferrers = async () => {
       referrer: {
         not: null,
       },
+      baseUrl: queriedUrl,
     },
   });
   return result;

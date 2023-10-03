@@ -4,9 +4,12 @@ import { retrieveTopStayed } from "@/services/dashboard/overview/topStayed";
 const router = express.Router();
 router.get("/top-stayed", async (req, res) => {
   try {
-    const { limit = 5 } = req.query;
+    const { limit = 5, queriedUrl } = req.query;
     const parsedLimit = Number(limit);
-    const topStayed = await retrieveTopStayed(parsedLimit);
+    const topStayed = await retrieveTopStayed({
+      limit: parsedLimit,
+      queriedUrl: queriedUrl as string,
+    });
     res.status(200).json({
       message: "Top visited retrieved",
       success: true,

@@ -5,7 +5,11 @@ const router = express.Router();
 
 router.get("/top-page-transitions", async (req, res) => {
   try {
-    const topPageTransitions = await retrieveTopPageTransitions();
+    const { limit = 5, queriedUrl } = req.query;
+    const topPageTransitions = await retrieveTopPageTransitions({
+      limit: Number(limit),
+      queriedUrl: queriedUrl as string,
+    });
     res.status(200).json({
       message: "Top page transitions retrieved",
       success: true,

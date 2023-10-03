@@ -4,7 +4,10 @@ import { retrieveReferrers } from "@/services/dashboard/overview/referrers";
 const router = express.Router();
 router.get("/referrers", async (req, res) => {
   try {
-    const referrers = await retrieveReferrers();
+    const { queriedUrl } = req.query;
+    const referrers = await retrieveReferrers({
+      queriedUrl: queriedUrl as string,
+    });
 
     res.status(200).json({
       message: "Referrers retrieved",

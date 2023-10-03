@@ -6,6 +6,7 @@ export const findVisitors = async ({
   startDate,
   endDate,
   sort,
+  queriedUrl,
 }: VisitorsQueryParamsDTO): Promise<
   Array<{
     entryTime: Date;
@@ -25,7 +26,7 @@ export const findVisitors = async ({
   >`
     SELECT DATE(entryTime) as date, COUNT(*) as count 
     FROM PageView 
-    WHERE entryTime BETWEEN ${startDate} AND ${endDate} 
+    WHERE entryTime BETWEEN ${startDate} AND ${endDate} AND baseUrl = ${queriedUrl}
     GROUP BY DATE(entryTime) 
     ${sortingClause}
   `;
