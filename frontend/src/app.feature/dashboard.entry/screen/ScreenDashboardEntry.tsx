@@ -4,10 +4,15 @@ import styled from "styled-components";
 import ChartsContainer from "@/app.feature/dashboard.entry/component/ChartsContainer";
 import TabBar from "@/app.components/TabBar";
 import MainTopNavigationBar from "@/app.components/MainTopNavigationBar";
+import { useSearchParams } from "next/navigation";
+import { ENV_CONSTANTS } from "@/app.module/constant/env";
+import { REGEX } from "@/app.module/utils/REGEX";
 const ScreenDashboardEntry = () => {
+  const queriedUrl =
+    useSearchParams().get("queriedUrl") || ENV_CONSTANTS.APP_EXAMPLE_PAGE_URL;
   return (
     <StyledWrapper>
-      <h2>Mini Dashboard</h2>
+      <h2>{queriedUrl.replace(REGEX.SIMPLIFY_URL_PREFIX, "")}</h2>
       <TabBar />
       <ChartsContainer />
     </StyledWrapper>

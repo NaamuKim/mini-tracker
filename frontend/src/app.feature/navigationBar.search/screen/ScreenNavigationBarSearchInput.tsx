@@ -76,7 +76,7 @@ const StyledWrapper = styled.div`
     list-style: none;
     position: absolute;
     padding-left: 20px;
-    top: 30px;
+    top: 100%;
     width: 300px;
     display: flex;
     flex-direction: column;

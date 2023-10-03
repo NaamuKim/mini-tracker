@@ -6,19 +6,29 @@ import { TTopPageTransitions } from "@/app.feature/dashboard.overview/module/typ
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { API_TOP_PAGE_TRANSITIONS } from "@/app.module/constant/api/app.dashboard/overview";
 import { REGEX } from "@/app.module/utils/REGEX";
+import { useSearchParams } from "next/navigation";
 
 const PageTransitionsBarChart = () => {
+  const queriedUrl = useSearchParams().get("queriedUrl");
   const { data: topPageTransitions } = useQueryFn<
     TTopPageTransitions,
     TTopPageTransitions["topPageTransitions"]
-  >([API_TOP_PAGE_TRANSITIONS], {
-    select: (data) =>
-      data.topPageTransitions.map((item) => ({
-        ...item,
-        from: item.from.replace(REGEX.SLICE_FIRST_SLASH, ""),
-        to: item.to.replace(REGEX.SLICE_FIRST_SLASH, ""),
-      })),
-  });
+  >(
+    [
+      API_TOP_PAGE_TRANSITIONS,
+      {
+        queriedUrl,
+      },
+    ],
+    {
+      select: (data) =>
+        data.topPageTransitions.map((item) => ({
+          ...item,
+          from: item.from.replace(REGEX.SLICE_FIRST_SLASH, ""),
+          to: item.to.replace(REGEX.SLICE_FIRST_SLASH, ""),
+        })),
+    },
+  );
 
   const [activeIndex, setActiveIndex] = useState(0);
 
