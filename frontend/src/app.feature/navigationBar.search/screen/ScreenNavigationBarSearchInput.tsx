@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useQueryFn from "@/app.module/react-query/useQueryFn";
 import { API_SEARCH_APP } from "@/app.module/constant/api/app.dashboard/searchAPP";
@@ -7,8 +7,10 @@ import { TSearchApps } from "@/app.feature/navigationBar.search/module/type/APIR
 import Link from "next/link";
 
 const ScreenNavigationBarSearchInput = () => {
+  const [isResultsOpened, setIsResultsOpened] = useState(false);
   const [word, setWord] = useState("");
   const [fetchingWord, setFetchingWord] = useState("");
+  const resultListRef = useRef<HTMLUListElement | null>(null);
   const debounce = useDebounce();
   const { data: possibleResults } = useQueryFn<
     TSearchApps,
@@ -18,9 +20,34 @@ const ScreenNavigationBarSearchInput = () => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsResultsOpened(true);
     setWord(e.target.value);
     debounce(() => setFetchingWord(e.target.value));
   };
+
+  const handleClickResult = (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+  ) => {
+    setIsResultsOpened(false);
+    setWord("");
+  };
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (
+        resultListRef.current &&
+        !resultListRef.current.contains(event.target as Node)
+      ) {
+        setIsResultsOpened(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <StyledWrapper>
@@ -30,10 +57,10 @@ const ScreenNavigationBarSearchInput = () => {
         type="text"
         placeholder="Search Your Page BaseURL"
       />
-      {possibleResults && word && (
-        <ul>
+      {possibleResults && word && isResultsOpened && (
+        <ul role="listbox" ref={resultListRef}>
           {possibleResults.map(({ baseUrl }, index) => (
-            <li key={baseUrl + String(index)}>
+            <li onClick={handleClickResult} key={baseUrl + String(index)}>
               <Link
                 href={{
                   query: {
