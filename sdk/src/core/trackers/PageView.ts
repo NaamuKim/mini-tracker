@@ -9,6 +9,7 @@ import { parseDevice } from "@/utils/parsers/device";
 import { parseOS } from "@/utils/parsers/os";
 import { EVENT_KEYS } from "@/constants/event";
 import { STORAGE_KEYS } from "@/constants/storage";
+import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
@@ -28,12 +29,15 @@ class PageViewTracker {
       "load",
       EVENT_KEYS.PAGE_VIEW_LOAD,
     );
+
+    // SPA 대응
+    HistoryMethodOverride.overridePushState(this.tagData.bind(this));
+    HistoryMethodOverride.overrideReplaceState(this.tagData.bind(this));
   }
 
-  tagData() {
+  private createPageViewData(): PageView & Session {
     const url = new URL(window.location.href);
-
-    const pageViewData: PageView & Session = {
+    return {
       baseUrl: url.origin,
       pageLocation: url.pathname + url.search + url.hash,
       referrer: document.referrer,
@@ -41,16 +45,21 @@ class PageViewTracker {
       os: parseOS(navigator.userAgent),
       device: parseDevice(navigator.userAgent),
     };
+  }
 
+  private createPageTransitionData():
+    | (PageTransition & {
+        fromPageLocation: string;
+        fromPageExitTime: Date;
+      })
+    | null {
     const fromPageLocation = this.storage.getItem(
       STORAGE_KEYS.FROM_PAGE_LOCATION,
     );
+    const currentLocation = this.createPageViewData().pageLocation;
 
-    if (fromPageLocation && fromPageLocation !== pageViewData.pageLocation) {
-      const pageTransitionData: PageTransition & {
-        fromPageLocation: string;
-        fromPageExitTime: Date;
-      } = {
+    if (fromPageLocation && fromPageLocation !== currentLocation) {
+      return {
         transitionTime: new Date(),
         elementSelector: this.storage.getItem(
           STORAGE_KEYS.ELEMENT_SELECTOR,
@@ -62,19 +71,22 @@ class PageViewTracker {
           ) as string,
         ),
       };
+    }
 
-      return MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
-        body: {
-          ...pageViewData,
-          ...pageTransitionData,
-        },
-      });
+    return null;
+  }
+
+  tagData() {
+    const pageViewData = this.createPageViewData();
+    const pageTransitionData = this.createPageTransitionData();
+
+    let body = { ...pageViewData };
+    if (pageTransitionData) {
+      body = { ...body, ...pageTransitionData };
     }
 
     return MINI_TRACKER_SERVER_API.post(API_PAGE_VIEW, {
-      body: {
-        ...pageViewData,
-      },
+      body,
     });
   }
 }
