@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "env-cmd -f .env/.env.local node localServer/app.js",
     "build": "node esBuild.js",
     "build:local": "env-cmd -f .env/.env.local npm run build",
     "deploy": "env-cmd -f .env/.env.production npm run build && env-cmd -f .env/.env.production node uploadToS3.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "env-cmd -f .env/.env.local node localServer/app.js"
+    "start:backend": "cd ../backend && npm run dev",
+    "start:next-13-spa": "cd ../frontend && npm run dev",
+    "start:not-spa": "npm run dev",
+    "start:all": "concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:next-13-spa\" \"npm run start:not-spa\"",
+    "kill:all": "lsof -i :8080 | awk 'NR!=1 {print $2}' | xargs kill && lsof -i :5000 | awk 'NR!=1 {print $2}' | xargs kill && lsof -i :3000 | awk 'NR!=1 {print $2}' | xargs kill",
+    "test": "npx cypress run & npm run start:all && npm run kill:all"
   },
   "keywords": [],
   "author": "naamukim",
@@ -18,6 +23,7 @@
     "@typescript-eslint/parser": "^6.2.0",
     "aws-sdk": "^2.1415.0",
     "chokidar": "^3.5.3",
+    "concurrently": "^8.2.1",
     "cypress": "^13.3.0",
     "env-cmd": "^10.1.0",
     "esbuild": "^0.18.17",
