@@ -2,12 +2,12 @@
 
 import { STORAGE_KEYS } from "../../../src/constants/storage";
 import { COOKIE } from "../../../src/constants/cookie";
-import { HTTP_API_URL, NOT_SPA_URL } from "../constants/url";
+import { HTTP_API_URL, NOT_SPA_URL, SPA_URL } from "../constants/url";
 
-describe("test initial sdk loaded", () => {
+const runSdkInitialLoadTests = (visitURL: string) => {
   beforeEach(() => {
     cy.intercept("POST", HTTP_API_URL + "/page-view").as("tagData");
-    cy.visit(NOT_SPA_URL);
+    cy.visit(visitURL);
     Object.values(STORAGE_KEYS).forEach((localStorageKeyName) => {
       cy.clearLocalStorage(localStorageKeyName);
     });
@@ -42,5 +42,15 @@ describe("test initial sdk loaded", () => {
       expect(setCookieHeader).to.include(COOKIE.SESSION_ID);
       expect(setCookieHeader).to.include("Expires");
     });
+  });
+};
+
+describe("SDK initial load", () => {
+  context("not spa page", () => {
+    runSdkInitialLoadTests(NOT_SPA_URL);
+  });
+
+  context("spa page", () => {
+    runSdkInitialLoadTests(SPA_URL);
   });
 });
