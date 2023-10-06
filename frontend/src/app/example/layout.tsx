@@ -7,9 +7,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <body>
       {children}
-      <Script src={ENV_CONSTANTS.APP_SDK_URL} />
-    </>
+      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+      <Script
+        src={ENV_CONSTANTS.APP_SDK_URL}
+        strategy="beforeInteractive"
+      ></Script>
+    </body>
   );
 }
