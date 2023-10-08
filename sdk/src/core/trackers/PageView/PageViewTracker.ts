@@ -10,19 +10,22 @@ import { parseOS } from "@/utils/parsers/os";
 import { EVENT_KEYS } from "@/constants/event";
 import { STORAGE_KEYS } from "@/constants/storage";
 import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
+import PageViewEventController from "@/core/trackers/PageView/PageViewEventController";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
   storage: AbstractStorage;
+  private readonly eventController: PageViewEventController;
   constructor(eventDispatcher: EventDispatcher, storage: AbstractStorage) {
     this.eventDispatcher = eventDispatcher;
     this.storage = storage;
+    this.eventController = new PageViewEventController(this.tagData.bind(this));
   }
 
   initialize() {
     this.eventDispatcher.subscribe(
       EVENT_KEYS.PAGE_VIEW_LOAD,
-      this.tagData.bind(this),
+      this.eventController.handleEvent.bind(this.eventController),
     );
     this.eventDispatcher.attachEventToElement(
       window,
@@ -31,8 +34,12 @@ class PageViewTracker {
     );
 
     // SPA 대응
-    HistoryMethodOverride.overridePushState(this.tagData.bind(this));
-    HistoryMethodOverride.overrideReplaceState(this.tagData.bind(this));
+    HistoryMethodOverride.overridePushState(
+      this.eventController.handleEvent.bind(this.eventController),
+    );
+    HistoryMethodOverride.overrideReplaceState(
+      this.eventController.handleEvent.bind(this.eventController),
+    );
   }
 
   private createPageViewData(): PageView & Session {
