@@ -1,7 +1,7 @@
 import PageTransitionTracker from "@/core/trackers/PageTransition";
 import EventDispatcher from "@/core/EventDispatcher";
 import IOCContainer from "@/core/container/IOCContatiner";
-import PageViewTracker from "@/core/trackers/PageView";
+import PageViewTracker from "@/core/trackers/PageView/PageViewTracker";
 import AbstractStorage from "@/core/storage";
 import { IOC_DEPENDENCIES_KEYS } from "@/constants/ioc";
 
