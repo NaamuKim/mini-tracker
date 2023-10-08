@@ -54,3 +54,38 @@ describe("SDK initial load", () => {
     runSdkInitialLoadTests(SPA_URL);
   });
 });
+
+const runDoNotTaggingTwiceTests = (visitURL: string) => {
+  let callCount = 0;
+  beforeEach(() => {
+    cy.intercept("POST", HTTP_API_URL + "/page-view", () => {
+      callCount++;
+    }).as("tagData");
+    cy.visit(visitURL);
+    Object.values(STORAGE_KEYS).forEach((localStorageKeyName) => {
+      cy.clearLocalStorage(localStorageKeyName);
+    });
+    cy.clearAllSessionStorage();
+    cy.clearCookie(COOKIE.SESSION_ID);
+  });
+
+  afterEach(() => {
+    callCount = 0;
+  });
+
+  it("checks not to send page view request twice", () => {
+    cy.wait("@tagData").then(() => {
+      cy.wrap(callCount).should("eq", 1);
+    });
+  });
+};
+
+describe("Do not tagging twice", () => {
+  context("not spa page", () => {
+    runDoNotTaggingTwiceTests(NOT_SPA_URL);
+  });
+
+  context("spa page", () => {
+    runDoNotTaggingTwiceTests(SPA_URL);
+  });
+});
