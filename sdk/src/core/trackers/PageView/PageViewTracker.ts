@@ -11,6 +11,7 @@ import { EVENT_KEYS } from "@/constants/event";
 import { STORAGE_KEYS } from "@/constants/storage";
 import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
 import PageViewEventController from "@/core/trackers/PageView/PageViewEventController";
+import { isReload } from "@/core/utils/reload";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
@@ -84,6 +85,7 @@ class PageViewTracker {
   }
 
   tagData() {
+    if (isReload()) return;
     const pageViewData = this.createPageViewData();
     const pageTransitionData = this.createPageTransitionData();
 
