@@ -1,4 +1,4 @@
-import { IStorage } from "@/services/storage/IStorage";
+import { IStorage } from "@/core/storage/IStorage";
 
 export class SessionStorage implements IStorage {
   getItem(key: string): string | null {

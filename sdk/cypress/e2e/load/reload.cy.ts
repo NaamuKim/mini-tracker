@@ -15,10 +15,10 @@ const testTaggingDoesNotDuplicateOnReload = (visitURL: string) => {
   it("checks reload does not send page view twice", () => {
     cy.wait("@tagData").then(() => {
       cy.reload();
-    });
-
-    cy.wait("@tagData").then(() => {
-      cy.wrap(callCount).should("eq", 1);
+      // wait for 1 second to make sure the second request is not sent
+      cy.wait(1000).then(() => {
+        expect(callCount).to.equal(1);
+      });
     });
   });
 };
