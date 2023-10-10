@@ -9,18 +9,20 @@ import { parseDevice } from "@/utils/parsers/device";
 import { parseOS } from "@/utils/parsers/os";
 import { EVENT_KEYS } from "@/constants/event";
 import { STORAGE_KEYS } from "@/constants/storage";
-import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
 import PageViewEventController from "@/core/trackers/PageView/PageViewEventController";
 import { isReload } from "@/core/utils/reload";
+import PageViewSPAHandler from "@/core/trackers/PageView/PageViewSPAHandler";
 
 class PageViewTracker {
   eventDispatcher: EventDispatcher;
   storage: AbstractStorage;
   private readonly eventController: PageViewEventController;
+  private readonly spaHandler: PageViewSPAHandler;
   constructor(eventDispatcher: EventDispatcher, storage: AbstractStorage) {
     this.eventDispatcher = eventDispatcher;
     this.storage = storage;
     this.eventController = new PageViewEventController(this.tagData.bind(this));
+    this.spaHandler = new PageViewSPAHandler(this.eventController);
   }
 
   initialize() {
@@ -35,12 +37,7 @@ class PageViewTracker {
     );
 
     // SPA 대응
-    HistoryMethodOverride.overridePushState(
-      this.eventController.handleEvent.bind(this.eventController),
-    );
-    HistoryMethodOverride.overrideReplaceState(
-      this.eventController.handleEvent.bind(this.eventController),
-    );
+    this.spaHandler.handleSPATransitions();
   }
 
   private createPageViewData(): PageView & Session {
