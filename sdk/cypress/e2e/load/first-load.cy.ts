@@ -3,16 +3,13 @@
 import { STORAGE_KEYS } from "../../../src/constants/storage";
 import { COOKIE } from "../../../src/constants/cookie";
 import { HTTP_API_URL, NOT_SPA_URL, SPA_URL } from "../constants/url";
+import { clearStorages } from "../utils/storage";
 
 const runSdkInitialLoadTests = (visitURL: string) => {
   beforeEach(() => {
     cy.intercept("POST", HTTP_API_URL + "/page-view").as("tagData");
     cy.visit(visitURL);
-    Object.values(STORAGE_KEYS).forEach((localStorageKeyName) => {
-      cy.clearLocalStorage(localStorageKeyName);
-    });
-    cy.clearAllSessionStorage();
-    cy.clearCookie(COOKIE.SESSION_ID);
+    clearStorages();
   });
 
   it("checks request body has page view properties", () => {
