@@ -20,13 +20,14 @@ const runBackButtonTests = ({
     it("checks page view is sent when back button is clicked", () => {
       cy.wait("@tagData").then(({ request: req }) => {
         const body = req.body;
+        console.log(body);
         cy.get(aTagSelector).first().click();
         cy.go("back");
         cy.wait("@tagData").then(({ request: { body: newBody } }) => {
           expect(newBody.os).to.equal(body.os);
           expect(newBody.device).to.equal(body.device);
           expect(newBody.baseUrl).to.equal(body.baseUrl);
-          expect(newBody.referrer).not.to.equal(body.referrer);
+          expect(newBody.fromPageLocation).to.equal(body.pageLocation);
         });
       });
     });

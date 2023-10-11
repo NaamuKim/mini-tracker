@@ -1,5 +1,6 @@
 import PageViewEventController from "@/core/trackers/PageView/PageViewEventController";
 import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
+import { isSPABackNavigation } from "@/core/utils/spa";
 
 class PageViewSPAHandler {
   private readonly eventController: PageViewEventController;
@@ -9,12 +10,22 @@ class PageViewSPAHandler {
   }
 
   handleSPATransitions() {
-    HistoryMethodOverride.overridePushState(
-      this.eventController.handleEvent.bind(this.eventController),
-    );
-    HistoryMethodOverride.overrideReplaceState(
-      this.eventController.handleEvent.bind(this.eventController),
-    );
+    this.handleHistoryPushState();
+    this.handleHistoryReplaceState();
+  }
+
+  handleHistoryPushState() {
+    HistoryMethodOverride.overridePushState(() => {
+      this.eventController.reset();
+      this.eventController.handleEvent();
+    });
+  }
+
+  handleHistoryReplaceState() {
+    HistoryMethodOverride.overrideReplaceState(() => {
+      if (isSPABackNavigation()) this.eventController.reset();
+      this.eventController.handleEvent();
+    });
   }
 }
 
