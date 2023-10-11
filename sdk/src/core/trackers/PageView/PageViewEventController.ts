@@ -1,7 +1,10 @@
 class PageViewEventController {
   private hasTaggedData: boolean = false;
+  private readonly tagDataFunction: () => void;
 
-  constructor(private tagDataFunction: () => void) {}
+  constructor(tagDataFunction: () => void) {
+    this.tagDataFunction = tagDataFunction;
+  }
 
   handleEvent() {
     if (this.hasTaggedData) return;

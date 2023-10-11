@@ -3,6 +3,7 @@ import { getQuerySelector } from "@/utils/parsers/dom";
 import { EVENT_KEYS } from "@/constants/event";
 import AbstractStorage from "@/core/storage";
 import { STORAGE_KEYS } from "@/constants/storage";
+import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
 
 class PageTransitionTracker {
   private readonly eventDispatcher: EventDispatcher;
@@ -17,6 +18,24 @@ class PageTransitionTracker {
     this.addParseElementSelectorEvent();
     this.addSaveFromPageLocationEvent();
     this.addSaveEventEmitTimeEvent();
+    this.overrideHistoryReplaceState();
+    this.overrideHistoryPushState();
+  }
+
+  overrideHistoryReplaceState() {
+    HistoryMethodOverride.overrideReplaceState(() => {
+      this.setFromPageLocation();
+      this.setEventEmitTime();
+      this.setEventEmitTime();
+    });
+  }
+
+  overrideHistoryPushState() {
+    HistoryMethodOverride.overridePushState(() => {
+      this.setFromPageLocation();
+      this.setEventEmitTime();
+      this.setEventEmitTime();
+    });
   }
 
   private addParseElementSelectorEvent() {
@@ -53,7 +72,6 @@ class PageTransitionTracker {
       "click",
       EVENT_KEYS.PAGE_TRANSITION_CLICK,
     );
-    // TODO: 주소 치고 이동하는 것에 대한 고려 필요
   }
 
   private setFromPageLocation() {
