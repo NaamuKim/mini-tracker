@@ -1,12 +1,21 @@
 import PageViewEventController from "@/core/trackers/PageView/PageViewEventController";
-import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
+import HistoryMethodOverride, {
+  HISTORY_REPLACE_PRIORITY,
+} from "@/core/utils/HistoryMethodOverride";
 import { isSPABackNavigation } from "@/core/utils/spa";
+import AbstractStorage from "@/core/storage";
+import { STORAGE_KEYS } from "@/constants/storage";
 
 class PageViewSPAHandler {
   private readonly eventController: PageViewEventController;
+  private readonly storage: AbstractStorage;
 
-  constructor(eventController: PageViewEventController) {
+  constructor(
+    eventController: PageViewEventController,
+    storage: AbstractStorage,
+  ) {
     this.eventController = eventController;
+    this.storage = storage;
   }
 
   handleSPATransitions() {
@@ -23,9 +32,15 @@ class PageViewSPAHandler {
 
   handleHistoryReplaceState() {
     HistoryMethodOverride.overrideReplaceState(() => {
-      if (isSPABackNavigation()) this.eventController.reset();
+      if (
+        isSPABackNavigation(
+          this.storage.getItem(STORAGE_KEYS.FROM_PAGE_LOCATION),
+        )
+      ) {
+        this.eventController.reset();
+      }
       this.eventController.handleEvent();
-    });
+    }, HISTORY_REPLACE_PRIORITY.TAG_DATA);
   }
 }
 

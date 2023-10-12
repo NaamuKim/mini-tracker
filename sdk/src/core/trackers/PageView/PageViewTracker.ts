@@ -22,7 +22,10 @@ class PageViewTracker {
     this.eventDispatcher = eventDispatcher;
     this.storage = storage;
     this.eventController = new PageViewEventController(this.tagData.bind(this));
-    this.spaHandler = new PageViewSPAHandler(this.eventController);
+    this.spaHandler = new PageViewSPAHandler(
+      this.eventController,
+      this.storage,
+    );
   }
 
   initialize() {

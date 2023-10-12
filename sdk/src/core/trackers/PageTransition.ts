@@ -3,7 +3,9 @@ import { getQuerySelector } from "@/utils/parsers/dom";
 import { EVENT_KEYS } from "@/constants/event";
 import AbstractStorage from "@/core/storage";
 import { STORAGE_KEYS } from "@/constants/storage";
-import HistoryMethodOverride from "@/core/utils/HistoryMethodOverride";
+import HistoryMethodOverride, {
+  HISTORY_REPLACE_PRIORITY,
+} from "@/core/utils/HistoryMethodOverride";
 
 class PageTransitionTracker {
   private readonly eventDispatcher: EventDispatcher;
@@ -27,7 +29,7 @@ class PageTransitionTracker {
       this.setFromPageLocation();
       this.setEventEmitTime();
       this.setEventEmitTime();
-    });
+    }, HISTORY_REPLACE_PRIORITY.SAVE_STATE);
   }
 
   overrideHistoryPushState() {
