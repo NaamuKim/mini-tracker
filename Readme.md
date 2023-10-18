@@ -5,8 +5,8 @@
 
 <h4 align="center">스크립트 한 줄이면 서비스 유저의 행동 패턴을 파악할 수 있는 Mini-Tracker SDK</h4>
 
-간단한 스크립트 삽입만으로 사용 가능: 복잡한 설정 없이 웹페이지에 스크립트를 삽입하는 것만으로 바로 사용 가능합니다. <br/>
-SPA 및 일반 웹페이지 모두 호환: SPA(Single Page Application) 뿐만 아니라 SPA가 아닌 웹페이지에서도 동작합니다.
+<div align="center">간단한 스크립트 삽입만으로 사용 가능: 복잡한 설정 없이 웹페이지에 스크립트를 삽입하는 것만으로 바로 사용 가능합니다.</div>
+<div align='center'>SPA 및 일반 웹페이지 모두 호환: SPA(Single Page Application) 뿐만 아니라 SPA가 아닌 웹페이지에서도 동작합니다.</div>
 
 ## 바로 시작하기
 Next.js 사용자라면?
