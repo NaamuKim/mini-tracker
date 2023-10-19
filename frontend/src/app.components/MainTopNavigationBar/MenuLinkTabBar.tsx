@@ -8,7 +8,7 @@ const currentMenuMap = {
   example: "example",
 } as const;
 const getCurrentMenuName = (pathname: string) => {
-  const currentMenu = pathname.split("/")[0] as keyof typeof currentMenuMap;
+  const currentMenu = pathname.split("/")[1] as keyof typeof currentMenuMap;
   return currentMenuMap[currentMenu]
     ? currentMenuMap[currentMenu]
     : currentMenuMap.dashboard;
