@@ -28,6 +28,7 @@ const StyledWrapper = styled.div`
   gap: 50px;
   #top-chart-section {
     display: flex;
+    gap: 10px;
   }
   #bottom-chart-section {
     display: flex;

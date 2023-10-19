@@ -18,7 +18,8 @@ import {
   getSevenDaysAgo,
 } from "@/app.module/utils/date";
 import { API_DAILY_VIEW } from "@/app.module/constant/api/app.dashboard/overview";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import DashboardBackground from "@/app.components/dashboard/DashboardBackground";
 
 const DailyViewLineChart = () => {
   const queriedUrl = useSearchParams().get("queriedUrl");
@@ -48,22 +49,24 @@ const DailyViewLineChart = () => {
   );
 
   return (
-    <ResponsiveContainer width="70%" height={300}>
-      <LineChart
-        data={dailyViewData}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="viewCount"
-          stroke="var(--primary-color)"
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <DashboardBackground width="70%" title="Daily View">
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart
+          data={dailyViewData}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="viewCount"
+            stroke="var(--primary-color)"
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </DashboardBackground>
   );
 };
 
