@@ -40,6 +40,9 @@ const MenuLinkTabBar = () => {
           Example Page
         </h2>
       </Link>
+      <Link href="/guide">
+        <h2>SDK Guide</h2>
+      </Link>
     </StyledWrapper>
   );
 };
