@@ -29,7 +29,7 @@ const YAxisLeftTick = ({
 export const measureTextWidth = (
   text: string,
   {
-    fontSize = 14,
+    fontSize = 16,
     fontFamily = "Arial",
   }: { fontSize?: number; fontFamily?: string } = {},
 ) => {
@@ -68,7 +68,7 @@ const SimpleBarChart: React.FC<TProps> = ({ data, yKey, xKey }) => {
         data={data}
         layout="vertical"
         margin={{
-          left: 10,
+          left: 20,
           right: maxTextWidth + (BAR_AXIS_SPACE - 8),
         }}
       >
